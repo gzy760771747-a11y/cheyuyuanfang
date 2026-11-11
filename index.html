@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse new and used vehicles, review auctions, and get an export quote from Carmall24.">
+  <meta name="typeface" content="MiSans by Xiaomi">
+  <title>Carmall24 · Find your next car in China</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="./index.html" aria-label="Carmall24 home">
+        <img src="assets/logo.png" width="132" height="40" alt="Carmall24">
+      </a>
+
+      <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+        <a href="#top" aria-current="page">Home</a>
+        <details class="menu source-menu">
+          <summary>Vehicle Source <img src="assets/nav-chevron.svg" alt=""></summary>
+          <div class="menu-panel">
+            <a href="https://www.carmall24.com/new-cars">New Cars</a>
+            <a href="https://www.carmall24.com/used-cars">Used Cars</a>
+            <a href="#vehicles">Selected Vehicles</a>
+          </div>
+        </details>
+        <a href="#auctions">Auctions</a>
+        <a href="https://www.carmall24.com/market">Vehicle Market Trends</a>
+        <a href="#news">News</a>
+        <a href="#services">Services</a>
+        <a href="https://www.carmall24.com/about">About Us</a>
+      </nav>
+
+      <div class="header-tools">
+        <details class="menu locale-menu">
+          <summary aria-label="Global, English">
+            <span class="site-region"><img src="assets/globe.svg" alt=""> Global</span>
+            <span class="locale-rule" aria-hidden="true"><img src="assets/language-divider.svg" alt=""></span>
+            <span>English <img src="assets/nav-chevron.svg" alt=""></span>
+          </summary>
+          <div class="menu-panel">
+            <a href="https://en.carmall24.com/" lang="en">English</a>
+            <a href="https://ru.carmall24.com/" lang="ru">русский язык</a>
+            <a href="https://ar.carmall24.com/" lang="ar">اللغة العربية</a>
+            <a href="https://es.carmall24.com/" lang="es">Español</a>
+            <a href="https://fr.carmall24.com/" lang="fr">Français</a>
+          </div>
+        </details>
+        <a class="header-icon header-search" href="#vehicle-search" aria-label="Search vehicles"><img src="assets/nav-search.svg" alt=""></a>
+        <details class="menu notification-menu">
+          <summary class="header-icon" aria-label="Notifications"><img src="assets/notification.svg" alt=""></summary>
+          <div class="menu-panel"><p>No new notifications.</p></div>
+        </details>
+        <a class="header-icon header-wallet" href="https://www.carmall24.com/account/wallet" aria-label="Wallet"><img src="assets/wallet.svg" alt=""></a>
+        <a class="header-icon" href="https://www.carmall24.com/account" aria-label="Account"><img src="assets/account.svg" alt=""></a>
+        <button class="header-icon mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="menu-bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-picture" src="assets/hero.png" alt="" fetchpriority="high">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 id="hero-title">Find your next<br>car in china.</h1>
+          <p>Browse new and used vehicles, review the details, and get an export quote for your destination.</p>
+        </div>
+        <form class="vehicle-search" id="vehicle-search" aria-label="Find a vehicle">
+          <label class="search-field">
+            <span>Brand</span>
+            <select name="brand">
+              <option value="">All Brands</option>
+              <option value="toyota">Toyota</option>
+              <option value="xpeng">Xiao Peng</option>
+              <option value="byd">BYD</option>
+              <option value="nio">NIO</option>
+            </select>
+          </label>
+          <span class="search-rule" aria-hidden="true"><img src="assets/filter-divider.svg" alt=""></span>
+          <label class="search-field">
+            <span>Type</span>
+            <select name="type">
+              <option value="">All Types</option>
+              <option value="suv">SUV</option>
+              <option value="sedan">Sedan</option>
+              <option value="new-energy">New Energy Vehicle</option>
+            </select>
+          </label>
+          <span class="search-rule" aria-hidden="true"><img src="assets/filter-divider.svg" alt=""></span>
+          <label class="search-field">
+            <span>Budget</span>
+            <select name="budget">
+              <option value="">Any Budget</option>
+              <option value="8000">Under $8,000</option>
+              <option value="10000">Under $10,000</option>
+              <option value="15000">Under $15,000</option>
+              <option value="20000">Under $20,000</option>
+            </select>
+          </label>
+          <button class="primary-button search-submit" type="submit"><img src="assets/filter-search.svg" alt=""> Search</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="quick-search">
+      <div class="container quick-search-inner">
+        <div class="quick-group">
+          <p>Popular brand</p>
+          <div class="chips">
+            <button type="button" data-filter="brand" data-value="xpeng" aria-pressed="false">Xiao Peng</button>
+            <button type="button" data-filter="brand" data-value="byd" aria-pressed="false">BYD</button>
+            <button type="button" data-filter="all">All Vehicles</button>
+            <button type="button" data-filter="brand" data-value="nio" aria-pressed="false">NIO</button>
+          </div>
+        </div>
+        <div class="quick-group quick-group-screening">
+          <p>Quick screening</p>
+          <div class="chips">
+            <button type="button" data-filter="type" data-value="new-energy" aria-pressed="false">New Energy Vehicle</button>
+            <button type="button" data-filter="type" data-value="suv" aria-pressed="false">SUV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-sections">
+      <div class="container">
+        <a class="arrival-banner" href="https://www.carmall24.com/new-cars">
+          <img class="arrival-picture" src="assets/new-arrivals.png" alt="">
+          <span class="arrival-copy">
+            <strong>New arrivals +166</strong>
+            <span>Explore the latest new cars on Carmall24</span>
+          </span>
+          <span class="arrival-arrow"><img src="assets/arrivals-chevron.svg" alt=""></span>
+        </a>
+      </div>
+
+      <section class="container section" id="vehicles" aria-labelledby="vehicles-title">
+        <div class="section-heading">
+          <h2 id="vehicles-title" tabindex="-1">Selected Vehicles</h2>
+          <a class="view-all" href="https://www.carmall24.com/used-cars">View All <img src="assets/view-chevron.svg" alt=""></a>
+        </div>
+        <div class="filter-feedback" hidden>
+          <p id="filter-status" role="status"></p>
+          <button type="button" data-filter="all">Clear filters</button>
+        </div>
+        <div class="vehicle-grid" data-card-count="4">
+          <article class="vehicle-card" data-brand="toyota" data-type="suv" data-price="9574">
+            <a href="https://www.carmall24.com/used-cars" class="vehicle-link">
+              <div class="vehicle-photo">
+                <img src="assets/toyota-rav4.png" alt="" width="901" height="756">
+              </div>
+              <div class="vehicle-info">
+                <h3 class="vehicle-title clamp">Toyota RAV4 Renfo 2022 model, 2.0L CVT two-wheel drive Style Edition</h3>
+                <p class="vehicle-specs">
+                  <span>2024.11</span><span class="spec-rule"><img src="assets/spec-divider.svg" alt=""></span>
+                  <span>12,200km</span><span class="spec-rule"><img src="assets/spec-divider.svg" alt=""></span>
+                  <span>Gasoline</span>
+                </p>
+                <div class="vehicle-pricing">
+                  <p>Indicative FOB:</p>
+                  <div class="price-row">
+                    <strong>$9,574</strong>
+                    <span class="price-saving">$1,850 below MMR <img src="assets/price-arrow.svg" alt=""></span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="auctions" id="auctions" aria-labelledby="auctions-title">
+        <div class="container auction-layout">
+          <div class="auction-intro">
+            <h2 id="auctions-title">Explore<br> Auction Lots</h2>
+            <p>Review The Vehicles, Schedule And Bidding Rules Before You Take Part.</p>
+          </div>
+          <div class="auction-grid">
+            <a class="auction-card" href="https://www.carmall24.com/account/auctions?type=live">
+              <span class="auction-icon auction-icon-live"><img src="assets/auction-live.png" alt=""></span>
+              <div>
+                <h3>Live Auctions</h3>
+                <p>Pay Attention To The Bidding Process At The Public Meeting</p>
+              </div>
+              <img src="assets/auction-arrow.svg" alt="">
+            </a>
+            <a class="auction-card" href="https://www.carmall24.com/account/auctions?type=sealed">
+              <span class="auction-icon auction-icon-sealed"><img src="assets/auction-sealed.png" alt=""></span>
+              <div>
+                <h3>Sealed-Bid<br>Auctions</h3>
+                <p>View The Auction Items And Submit A Private Bid</p>
+              </div>
+              <img src="assets/auction-arrow.svg" alt="">
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section" id="purchase" aria-labelledby="purchase-title">
+        <div class="section-heading"><h2 id="purchase-title">Purchase Flow</h2></div>
+        <div class="purchase-panel">
+          <div class="steps-connector" aria-hidden="true"></div>
+          <ol class="purchase-steps">
+            <li>
+              <img src="assets/step-order.svg" alt="">
+              <span class="step-number">Step 1</span>
+              <h3>ORDER</h3>
+              <p>Buy now to place your order and pay your reservation deposit, or inquire now to receive a quote and confirm your order.</p>
+            </li>
+            <li>
+              <img src="assets/step-payment.svg" alt="">
+              <span class="step-number">Step 2</span>
+              <h3>PAYMENT</h3>
+              <p>Pay your deposit or balance. You can complete the payment online or by wire transfer.</p>
+            </li>
+            <li>
+              <img src="assets/step-shipping.svg" alt="">
+              <span class="step-number">Step 3</span>
+              <h3>SHIPPING</h3>
+              <p>Upon completion of vehicle reconditioning and export documentation, we will ship the vehicle to your designated destination port</p>
+            </li>
+            <li>
+              <img src="assets/step-pickup.svg" alt="">
+              <span class="step-number">Step 4</span>
+              <h3>PICKUP</h3>
+              <p>Clear customs and pick up the vehicle at the destination port.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="container section" id="services" aria-labelledby="services-title">
+        <div class="section-heading"><h2 id="services-title">Why Choose Us</h2></div>
+        <div class="benefits">
+          <article class="benefit-card">
+            <span class="benefit-icon"><span class="benefit-crop icon-integrity"><img src="assets/values-sprite.png" alt=""></span></span>
+            <h3>Integrity Is The Foundation</h3>
+            <p>Uphold business ethics and vehicle quality. Real-time warehouse videos and shipping updates build transparent, global customer trust.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon"><span class="benefit-crop icon-pricing"><img src="assets/values-sprite.png" alt=""></span></span>
+            <h3>Transparent Pricing</h3>
+            <p>300+ dealer partners, 200+ city vehicle sources, 10,000+ in-stock vehicles — new, used and custom models.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon"><span class="benefit-crop icon-efficiency"><img src="assets/values-sprite.png" alt=""></span></span>
+            <h3>Professional And Efficient</h3>
+            <p>One-stop import/export services: customs declaration, inspection, documents, FX settlement and tariff advice for streamlined trade.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon"><span class="benefit-crop icon-service"><img src="assets/values-sprite.png" alt=""></span></span>
+            <h3>Exclusive Service</h3>
+            <p>Dedicated team providing native-language service from consultation and quotation to contract and after-sales support.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon"><span class="benefit-crop icon-inspection"><img src="assets/services-sprite.png" alt=""></span></span>
+            <h3>Transparent Vehicle Inspections</h3>
+            <p>Up to 350-point checks screen for accident, fire or flood damage. View warehouse footage and track shipments on our platform.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon"><span class="benefit-crop icon-shipping"><img src="assets/services-sprite.png" alt=""></span></span>
+            <h3>Global Shipping &amp; Export Support</h3>
+            <p>4,000+ shipping routes from major Chinese ports worldwide. We handle customs, inspection and export paperwork for smooth delivery.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section" id="news" aria-labelledby="news-title">
+        <div class="section-heading">
+          <h2 id="news-title">Industry News</h2>
+          <a class="view-all" href="https://www.carmall24.com/news">View All <img src="assets/view-chevron.svg" alt=""></a>
+        </div>
+        <div class="news-carousel">
+          <button class="news-arrow news-arrow-prev" type="button" aria-label="Previous news item" aria-controls="news-track" disabled><img src="assets/news-chevron.svg" alt=""></button>
+          <div class="news-track" id="news-track" data-card-count="5">
+            <article class="news-card">
+              <a href="https://www.carmall24.com/news">
+                <div class="news-photo"><img src="assets/news-car.png" alt="" width="500" height="500"></div>
+                <div class="news-copy">
+                  <h3 class="clamp">The Mengshi X700 is now available at a limited-time starting price of RMB 209,800, making choices in the same price range more challenging.</h3>
+                  <p class="clamp">Recently, the Dongfeng MENGZI X700 was officially launched. The new vehicle is available in four models—325KM Rear-Wheel Drive Pro, 285KM All-Wheel Drive Ma</p>
+                  <div class="news-meta"><strong>Administrator</strong><time datetime="2026-11-10">2026-11-10</time></div>
+                </div>
+              </a>
+            </article>
+          </div>
+          <button class="news-arrow news-arrow-next" type="button" aria-label="Next news item" aria-controls="news-track" disabled><img src="assets/news-chevron.svg" alt=""></button>
+          <p class="visually-hidden" id="news-status" role="status"></p>
+        </div>
+      </section>
+    </div>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <img class="contact-picture" src="assets/contact-background.png" alt="">
+      <div class="container contact-layout">
+        <div class="contact-intro">
+          <h2 id="contact-title">Do You Have Any Questions?</h2>
+          <p>We Are Happy To Answer Any Of Your Questions Relating To Our Inventory, Locations Or The Way We Do Business.</p>
+          <img src="assets/contact-rule.svg" alt="">
+        </div>
+        <form class="contact-form" id="contact-form" method="post">
+          <div class="contact-fields">
+            <label class="contact-field contact-required">
+              <span class="visually-hidden">Name</span>
+              <input name="name" placeholder="Name" autocomplete="name" maxlength="100" required>
+              <img src="assets/required.svg" alt="">
+            </label>
+            <label class="contact-field contact-region">
+              <span class="visually-hidden">State/Province</span>
+              <input name="province" placeholder="State/Province" autocomplete="address-level1" list="provinces" maxlength="100">
+              <img src="assets/province-chevron.svg" alt="">
+            </label>
+            <datalist id="provinces">
+              <option value="Beijing"></option>
+              <option value="Guangdong"></option>
+              <option value="Hebei"></option>
+              <option value="Shanghai"></option>
+              <option value="Tianjin"></option>
+              <option value="Xinjiang"></option>
+            </datalist>
+            <label class="contact-field contact-required">
+              <span class="visually-hidden">E-Mail</span>
+              <input name="email" placeholder="E-Mail" type="email" autocomplete="email" maxlength="160" required>
+              <img src="assets/required.svg" alt="">
+            </label>
+            <label class="contact-field">
+              <span class="visually-hidden">WhatsApp number</span>
+              <input name="whatsapp" placeholder="WhatsApp" type="tel" autocomplete="tel" maxlength="50">
+            </label>
+            <label class="contact-field contact-message">
+              <span class="visually-hidden">Message</span>
+              <textarea name="message" placeholder="WhatsApp" maxlength="1500"></textarea>
+            </label>
+          </div>
+          <button class="primary-button contact-submit" type="submit">Submit</button>
+          <p class="form-status" role="status" hidden>Your inquiry is ready. <a id="email-draft" href="mailto:service@carmall24.com">Open email draft</a></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <section>
+          <h2>Resource</h2>
+          <ul>
+            <li><a href="https://www.carmall24.com/new-cars">New Cars</a></li>
+            <li><a href="https://www.carmall24.com/used-cars">Used Cars</a></li>
+            <li><a href="#auctions">Auction</a></li>
+            <li><a href="https://www.carmall24.com/market">Market Trends</a></li>
+            <li><a href="#news">News</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>About Us</h2>
+          <ul>
+            <li><a href="https://www.carmall24.com/about">About Us</a></li>
+            <li><a href="https://www.carmall24.com/privacy">Privacy Policy</a></li>
+            <li><a href="https://www.carmall24.com/terms">Terms &amp; Conditions</a></li>
+            <li><a href="https://www.carmall24.com/shipping-policy">Shipping Policy</a></li>
+            <li><a href="https://www.carmall24.com/refund-policy">Return and Refund Policy</a></li>
+            <li><a href="https://www.carmall24.com/after-sales">After-Sales Policy</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Global Website</h2>
+          <ul>
+            <li><a href="https://en.carmall24.com/" lang="en">English</a></li>
+            <li><a href="https://ru.carmall24.com/" lang="ru">русский язык</a></li>
+            <li><a href="https://ar.carmall24.com/" lang="ar">اللغة العربية</a></li>
+            <li><a href="https://es.carmall24.com/" lang="es">Español</a></li>
+            <li><a href="https://fr.carmall24.com/" lang="fr">Francés</a></li>
+          </ul>
+        </section>
+        <div class="footer-apps">
+          <section>
+            <h2>Download Our App</h2>
+            <div class="store-badges">
+              <a href="https://apps.apple.com/app/carmall24/id6760745816"><img src="assets/app-store.png" width="100" height="33" alt="Download on the App Store"></a>
+              <a href="https://play.google.com/store/search?q=Carmall24&amp;c=apps"><img src="assets/google-play.png" width="100" height="33" alt="Get it on Google Play"></a>
+            </div>
+          </section>
+          <section>
+            <h2>Shop Share</h2>
+            <a href="https://luxing.carmall24.com">Luxing Aerospace Hebei Special Purpose Vehicle Co., Ltd.</a>
+          </section>
+        </div>
+        <section class="footer-contact">
+          <h2>Contact Us</h2>
+          <ul>
+            <li><img src="assets/mail.svg" alt=""><a href="mailto:service@carmall24.com">service@carmall24.com</a></li>
+            <li><img src="assets/call.svg" alt=""><span>WhatsApp: +86 0000000000</span></li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-rule" aria-hidden="true"><img src="assets/footer-divider.svg" alt=""></div>
+        <div class="footer-details">
+          <section class="footer-offices">
+            <h2>Company Address</h2>
+            <ul>
+              <li><img src="assets/location.svg" alt=""><span>No. 12 Beiling Road, Horgos, Ili Kazakh Autonomous Prefecture, Xinjiang Uygur Autonomous Region, China</span></li>
+              <li><img src="assets/location.svg" alt=""><span>27F, Tower B, Zhongtai International Plaza, Tianhe District, Guangzhou, China</span></li>
+              <li><img src="assets/location.svg" alt=""><span>No. 3351 Gudai Road, Minhang District, Shanghai, China</span></li>
+            </ul>
+          </section>
+          <section class="footer-social">
+            <h2>Follow Us</h2>
+            <div class="social-links">
+              <a href="https://www.facebook.com/people/Carmall24com/61586290542689/"><img src="assets/facebook.svg" alt="Facebook"></a>
+              <a href="https://www.pinterest.com/search/pins/?q=Carmall24"><img src="assets/pinterest.svg" alt="Pinterest"></a>
+              <a href="https://www.instagram.com/carmall24com"><img src="assets/instagram.png" width="20" height="20" alt="Instagram"></a>
+            </div>
+          </section>
+        </div>
+        <div class="footer-rule" aria-hidden="true"><img src="assets/footer-divider.svg" alt=""></div>
+        <p class="copyright">Copyright © 2026 Carmall24.com <span lang="zh-CN">津ICP备2025038322号-1</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="vehicle-dialog" id="vehicle-dialog" aria-labelledby="vehicle-dialog-title">
+    <form method="dialog" class="dialog-close"><button type="submit" aria-label="Close vehicle details">×</button></form>
+    <img class="dialog-photo" src="assets/toyota-rav4.png" alt="">
+    <div class="dialog-body">
+      <h2 id="vehicle-dialog-title">Toyota RAV4 Renfo 2022 model, 2.0L CVT two-wheel drive Style Edition</h2>
+      <p>2024.11 · 12,200km · Gasoline</p>
+      <p>Indicative FOB: <strong>$9,574</strong></p>
+      <a class="primary-button" href="#contact">Ask about this vehicle</a>
+    </div>
+  </dialog>
+</body>
+</html>
