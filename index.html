@@ -12,7 +12,7 @@
 </head>
 <body id="top">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="site-header">
+  <header class="site-header site-header--home">
     <div class="container header-inner">
       <a class="wordmark" href="./index.html" aria-label="Carmall24 home">
         <img src="assets/logo.png" width="132" height="40" alt="Carmall24">
@@ -87,7 +87,13 @@
         <a href="https://www.carmall24.com/market">Vehicle Market Trends</a>
         <a href="#news">News</a>
         <a href="#services">Services</a>
-        <a href="https://www.carmall24.com/about">About Us</a>
+        <details class="menu about-menu">
+          <summary class="about-trigger">About Us <img src="assets/nav-chevron.svg" alt=""></summary>
+          <div class="menu-panel">
+            <a href="https://www.carmall24.com/about">About Us</a>
+            <a href="./work-with-us.html">Work With Us</a>
+          </div>
+        </details>
         <button class="mobile-search-trigger" type="button" aria-haspopup="dialog" aria-controls="header-search-dialog" aria-expanded="false">Search vehicles</button>
       </nav>
 

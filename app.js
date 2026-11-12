@@ -51,7 +51,23 @@
     vehicleTitle.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
   }
 
-  searchForm.addEventListener('submit', event => {
+  function showVehicleResults(filter, value) {
+    if (!searchForm) {
+      const url = new URL('./index.html', location.href);
+      url.searchParams.set(filter, value);
+      url.hash = 'vehicles';
+      location.assign(url.href);
+      return;
+    }
+
+    const select = searchForm.elements.namedItem(filter);
+    if (select && ![...select.options].some(option => option.value === value)) return;
+    searchForm.reset();
+    if (select) select.value = value;
+    applyFilters(select ? '' : value);
+  }
+
+  searchForm?.addEventListener('submit', event => {
     event.preventDefault();
     applyFilters();
   });
@@ -72,6 +88,7 @@
   const navigation = document.querySelector('#main-navigation');
   const menuToggle = document.querySelector('.mobile-menu-toggle');
   const menus = [...header.querySelectorAll('details')];
+  const aboutMenu = header.querySelector('.about-menu');
   const makesMenu = header.querySelector('.makes-menu');
   const makesTrigger = makesMenu.querySelector('.makes-trigger');
   const makesPanel = makesMenu.querySelector('.makes-panel');
@@ -91,7 +108,10 @@
   function setNavigation(open) {
     navigation.classList.toggle('is-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
-    if (!open) setMakesPanel(false);
+    if (!open) {
+      setMakesPanel(false);
+      aboutMenu.open = false;
+    }
   }
 
   matchMedia('(max-width: 1360px)').addEventListener('change', () => setNavigation(false));
@@ -116,8 +136,12 @@
     if (event.relatedTarget && !makesMenu.contains(event.relatedTarget)) setMakesPanel(false);
   });
 
+  aboutMenu.addEventListener('focusout', event => {
+    if (event.relatedTarget && !aboutMenu.contains(event.relatedTarget)) aboutMenu.open = false;
+  });
+
   makesPanel.querySelectorAll('[data-makes-filter]').forEach(list => {
-    const select = searchForm.elements.namedItem(list.dataset.makesFilter);
+    const select = searchForm?.elements.namedItem(list.dataset.makesFilter);
     if (!select) return;
     list.querySelectorAll('button[data-value]').forEach(button => {
       const value = button.dataset.value;
@@ -131,12 +155,13 @@
     const button = event.target.closest('button[data-value]');
     if (!button) return;
     const filter = button.closest('[data-makes-filter]').dataset.makesFilter;
-    const select = searchForm.elements.namedItem(filter);
-    searchForm.reset();
-    if (select) select.value = button.dataset.value;
     setNavigation(false);
-    applyFilters(filter === 'model' ? button.dataset.value : '');
+    showVehicleResults(filter, button.dataset.value);
   });
+
+  const vehicleQuery = new URLSearchParams(location.search);
+  const initialFilter = ['brand', 'type', 'budget', 'model', 'q'].find(name => vehicleQuery.get(name)?.trim());
+  if (searchForm && initialFilter) showVehicleResults(initialFilter, vehicleQuery.get(initialFilter).trim());
 
   menuToggle.addEventListener('click', () => {
     setNavigation(menuToggle.getAttribute('aria-expanded') === 'false');
@@ -161,12 +186,12 @@
       setMakesPanel(false);
       return;
     }
-    if (!header.contains(event.target)) return;
     const openMenu = menus.find(menu => menu.open);
     if (openMenu) {
+      const restoreFocus = openMenu.contains(document.activeElement);
       openMenu.open = false;
-      openMenu.querySelector('summary').focus();
-    } else if (navigation.classList.contains('is-open')) {
+      if (restoreFocus) openMenu.querySelector('summary').focus();
+    } else if (header.contains(event.target) && navigation.classList.contains('is-open')) {
       setNavigation(false);
       menuToggle.focus();
     }
@@ -236,8 +261,7 @@
     const previousSearches = searchHistory.filter(item => normalizeSearch(item) !== normalizeSearch(keyword));
     saveSearchHistory([keyword, ...previousSearches].slice(0, historyLimit));
     headerSearchDialog.close('search');
-    searchForm.reset();
-    applyFilters(keyword);
+    showVehicleResults('q', keyword);
   }
 
   function renderSearchHistory() {
@@ -535,6 +559,60 @@
     localeTrigger.focus({ preventScroll: true });
   });
   updateLocaleTrigger();
+
+  const partnershipForm = document.querySelector('#partner-application');
+  if (partnershipForm) {
+    const countrySelect = partnershipForm.elements.namedItem('country');
+    const otherCountry = countrySelect.querySelector('option[value="Other"]');
+    regionalCountries.slice(1).forEach(({ name }) => {
+      countrySelect.add(new Option(name, name), otherCountry);
+    });
+
+    const draftStatus = document.querySelector('#partner-form-status');
+    const draftLink = document.querySelector('#partner-email-draft');
+
+    partnershipForm.addEventListener('input', event => {
+      if (event.target instanceof HTMLInputElement) event.target.setCustomValidity('');
+      draftStatus.hidden = true;
+    });
+
+    partnershipForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const fields = Object.fromEntries([...new FormData(partnershipForm)].map(([name, value]) => [name, value.trim()]));
+      const missingName = ['contact', 'company'].find(name => !fields[name]);
+      if (missingName) {
+        const input = partnershipForm.elements.namedItem(missingName);
+        input.setCustomValidity('Enter a ' + missingName + ' name.');
+        input.reportValidity();
+        return;
+      }
+
+      const digits = fields.phone.replace(/\D/g, '');
+      if (!/^[\d\s().-]+$/.test(fields.phone) || digits.length < 6 || digits.length + fields.calling_code.length - 1 > 15) {
+        const phone = partnershipForm.elements.namedItem('phone');
+        phone.setCustomValidity('Enter a valid local phone number.');
+        phone.reportValidity();
+        return;
+      }
+
+      const details = [
+        'Partnership type: ' + fields.partnership,
+        'Country / Region: ' + fields.country,
+        'Contact name: ' + fields.contact,
+        'Company name: ' + fields.company,
+        'Imported a vehicle from China: ' + fields.imported,
+        fields.volume && 'Approximate monthly sales: ' + fields.volume,
+        fields.contact_method + ': ' + fields.calling_code + ' ' + fields.phone,
+        fields.requirements && 'Additional requirements: ' + fields.requirements
+      ].filter(Boolean).join('\r\n');
+      const message = 'Hello Carmall24, I’d like to discuss a dealer partnership.\r\n\r\n' + details;
+      draftLink.href = 'mailto:service@carmall24.com?subject=Carmall24%20dealer%20application&body=' + encodeURIComponent(message);
+      draftStatus.hidden = false;
+      draftLink.focus();
+    });
+  }
+
+  if (!searchForm) return;
 
   const vehicleDialog = document.querySelector('#vehicle-dialog');
   vehicleGrid.addEventListener('click', event => {
