@@ -172,7 +172,7 @@ form[data-validate] :is(input, select, textarea)[aria-invalid="true"] {
   color: var(--white);
 }
 
-.site-header:not(.site-header--home) :is(.about-trigger, .header-tools) img[src$=".svg"] {
+.site-header:not(.site-header--home) .header-tools img[src$=".svg"] {
   /* Tint the monochrome navigation assets to #0f0f0f. */
   filter: brightness(0) invert(5.88235294%);
 }
@@ -185,8 +185,18 @@ form[data-validate] :is(input, select, textarea)[aria-invalid="true"] {
   gap: 12px;
 }
 
-.wordmark img {
-  object-fit: cover;
+.site-header--home .wordmark {
+  position: relative;
+}
+
+.site-header--home .wordmark::after {
+  position: absolute;
+  inset: 0;
+  background: var(--white);
+  mask: url("assets/header-logo.png") center / contain no-repeat;
+  clip-path: inset(0 25% 0 0);
+  pointer-events: none;
+  content: "";
 }
 
 .main-nav,
@@ -197,7 +207,6 @@ form[data-validate] :is(input, select, textarea)[aria-invalid="true"] {
 
 .main-nav > a,
 .makes-trigger,
-.about-trigger,
 .mobile-search-trigger {
   display: flex;
   align-items: center;
@@ -224,7 +233,6 @@ form[data-validate] :is(input, select, textarea)[aria-invalid="true"] {
 .wordmark,
 .main-nav > a,
 .makes-trigger,
-.about-trigger,
 .mobile-search-trigger,
 .locale-trigger,
 .header-icon {
@@ -234,7 +242,6 @@ form[data-validate] :is(input, select, textarea)[aria-invalid="true"] {
 @media (hover: hover) {
   .main-nav > a:hover,
   .makes-trigger:hover,
-  .about-trigger:hover,
   .mobile-search-trigger:hover,
   .locale-trigger:hover,
   .header-icon:hover {
@@ -245,7 +252,6 @@ form[data-validate] :is(input, select, textarea)[aria-invalid="true"] {
 .wordmark:active,
 .main-nav > a:active,
 .makes-trigger:active,
-.about-trigger:active,
 .mobile-search-trigger:active,
 .locale-trigger:active,
 .header-icon:active {
@@ -378,34 +384,11 @@ form[data-validate] :is(input, select, textarea)[aria-invalid="true"] {
   right: 0;
 }
 
-.menu-panel a, .menu-panel p {
+.menu-panel p {
   display: block;
   padding: 8px 12px;
   border-radius: 6px;
   white-space: nowrap;
-}
-
-.menu-panel a:hover,
-.menu-panel a:focus-visible {
-  background: #eff4ff;
-  color: var(--blue);
-}
-
-.about-trigger {
-  gap: 8px;
-}
-
-.about-menu[open] .about-trigger img {
-  transform: rotate(180deg);
-}
-
-.about-menu .menu-panel {
-  right: 0;
-}
-
-.about-menu .menu-panel a:focus-visible {
-  outline-color: var(--blue);
-  outline-offset: -2px;
 }
 
 .locale-trigger {
@@ -2205,13 +2188,13 @@ html:has(.locale-dialog[open], .header-search-dialog[open], .makes-trigger[aria-
 }
 
 @media (1360px < width <= 1420px) {
-  .main-nav > a, .makes-trigger, .about-trigger {
+  .main-nav > a, .makes-trigger {
     padding-inline: 8px;
   }
 }
 
 @media (1420px < width <= 1480px) {
-  .main-nav > a, .makes-trigger, .about-trigger {
+  .main-nav > a, .makes-trigger {
     padding-inline: 12px;
   }
 }
@@ -2244,12 +2227,6 @@ html:has(.locale-dialog[open], .header-search-dialog[open], .makes-trigger[aria-
 
   .main-nav.is-open {
     display: flex;
-  }
-
-  .about-menu .menu-panel {
-    position: static;
-    margin: 4px 0;
-    box-shadow: none;
   }
 
   .main-nav:has(.makes-trigger[aria-expanded="true"]) {

@@ -164,6 +164,12 @@
   }
 
   function showVehicleResults(filter, value) {
+    const inventory = document.querySelector('[data-inventory]');
+    if (inventory) {
+      inventory.dispatchEvent(new CustomEvent('carmall24:inventory-filter', { detail: { filter, value } }));
+      return;
+    }
+
     if (!searchForm) {
       const url = new URL('./index.html', location.href);
       url.searchParams.set(filter, value);
@@ -200,7 +206,6 @@
   const navigation = document.querySelector('#main-navigation');
   const menuToggle = document.querySelector('.mobile-menu-toggle');
   const menus = [...header.querySelectorAll('details')];
-  const aboutMenu = header.querySelector('.about-menu');
   const makesMenu = header.querySelector('.makes-menu');
   const makesTrigger = makesMenu.querySelector('.makes-trigger');
   const makesPanel = makesMenu.querySelector('.makes-panel');
@@ -220,10 +225,7 @@
   function setNavigation(open) {
     navigation.classList.toggle('is-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
-    if (!open) {
-      setMakesPanel(false);
-      aboutMenu.open = false;
-    }
+    if (!open) setMakesPanel(false);
   }
 
   matchMedia('(max-width: 1360px)').addEventListener('change', () => setNavigation(false));
@@ -246,10 +248,6 @@
 
   makesMenu.addEventListener('focusout', event => {
     if (event.relatedTarget && !makesMenu.contains(event.relatedTarget)) setMakesPanel(false);
-  });
-
-  aboutMenu.addEventListener('focusout', event => {
-    if (event.relatedTarget && !aboutMenu.contains(event.relatedTarget)) aboutMenu.open = false;
   });
 
   makesPanel.querySelectorAll('[data-makes-filter]').forEach(list => {
@@ -282,7 +280,7 @@
   document.addEventListener('click', event => {
     const target = event.target;
     menus.forEach(menu => {
-      if (!menu.contains(target) || target.closest('.menu-panel a')) menu.open = false;
+      if (!menu.contains(target)) menu.open = false;
     });
     if (!header.contains(target) || target === header || target.closest('.main-nav a')) {
       setNavigation(false);
@@ -724,6 +722,10 @@
   const contactForm = document.querySelector('#contact-form');
   const emailDraft = document.querySelector('#email-draft');
   const formStatus = document.querySelector('.form-status');
+  const inquiryVehicle = vehicleQuery.get('vehicle')?.trim().slice(0, 200);
+  if (inquiryVehicle) {
+    contactForm.elements.message.value = 'I would like to ask about ' + inquiryVehicle + '.';
+  }
 
   contactForm.addEventListener('submit', event => {
     if (event.defaultPrevented) return;

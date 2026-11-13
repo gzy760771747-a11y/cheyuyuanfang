@@ -2,7 +2,7 @@
   --dealer-actions-height: 92px;
 }
 
-.dealer-application-page .site-header :is(.about-trigger, .header-tools) img[src$=".svg"] {
+.dealer-application-page .site-header .header-tools img[src$=".svg"] {
   filter: none;
 }
 

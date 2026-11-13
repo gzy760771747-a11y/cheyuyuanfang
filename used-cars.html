@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse used vehicles from China and request an export quote from Carmall24.">
+  <meta name="typeface" content="MiSans by Xiaomi">
+  <title>Used Cars · Carmall24</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="inventory.css">
+  <script src="app.js" defer></script>
+  <script src="inventory-data.js" defer></script>
+  <script src="inventory.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="./index.html" aria-label="Carmall24 home">
+        <img src="assets/header-logo.png" width="132" height="44" alt="Carmall24">
+      </a>
+
+      <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+        <div class="makes-menu">
+          <button class="makes-trigger" type="button" aria-expanded="false" aria-controls="makes-panel">Makes</button>
+          <div class="makes-panel" id="makes-panel" hidden>
+            <div class="container makes-panel-inner">
+              <div class="makes-columns">
+                <section class="makes-column" aria-labelledby="makes-brands-title">
+                  <h2 id="makes-brands-title">Popular Makes</h2>
+                  <ul class="makes-options makes-options-with-icons" data-makes-filter="brand">
+                    <li><button type="button" data-value="toyota">Toyota</button></li>
+                    <li><button type="button" data-value="volkswagen">Volkswagen</button></li>
+                    <li><button type="button" data-value="bmw">BMW</button></li>
+                    <li><button type="button" data-value="byd">BYD</button></li>
+                    <li><button type="button" data-value="audi">Audi</button></li>
+                    <li><button type="button" data-value="mercedes-benz">Mercedes-Benz</button></li>
+                    <li><button type="button" data-value="honda">Honda</button></li>
+                    <li><button type="button" data-value="hyundai">Hyundai</button></li>
+                    <li><button type="button" data-value="nissan">Nissan</button></li>
+                  </ul>
+                </section>
+                <section class="makes-column" aria-labelledby="makes-types-title">
+                  <h2 id="makes-types-title">Shop By Type</h2>
+                  <ul class="makes-options makes-options-with-icons" data-makes-filter="type">
+                    <li><button type="button" data-value="sedan">Sedan</button></li>
+                    <li><button type="button" data-value="suv">SUV</button></li>
+                    <li><button type="button" data-value="minivan">Mlini Van</button></li>
+                    <li><button type="button" data-value="hatchback">Hatchback</button></li>
+                    <li><button type="button" data-value="wagon">Wagon</button></li>
+                    <li><button type="button" data-value="pickup">Pick Up</button></li>
+                    <li><button type="button" data-value="van">Van</button></li>
+                    <li><button type="button" data-value="truck">Truck</button></li>
+                  </ul>
+                </section>
+                <section class="makes-column" aria-labelledby="makes-models-title">
+                  <h2 id="makes-models-title">Popular Models</h2>
+                  <ul class="makes-options makes-options-with-icons" data-makes-filter="model">
+                    <li><button type="button" data-value="Audi A3">Audi A3</button></li>
+                    <li><button type="button" data-value="BMW X1">BMW X1</button></li>
+                    <li><button type="button" data-value="BMW Series">BMW Series</button></li>
+                    <li><button type="button" data-value="Havai H6">Havai H6</button></li>
+                    <li><button type="button" data-value="Toyota Corolla">Toyota Corolla</button></li>
+                    <li><button type="button" data-value="Volkswagen Golf">Volkswagen Golf</button></li>
+                    <li><button type="button" data-value="Audi Q3">Audi Q3</button></li>
+                    <li><button type="button" data-value="Mercedes-Benz Class">Mercedes-Benz Class</button></li>
+                    <li><button type="button" data-value="Toyota RAV4">Toyota RAV4</button></li>
+                    <li class="makes-placeholder" aria-hidden="true"></li>
+                  </ul>
+                </section>
+                <section class="makes-column" aria-labelledby="makes-budgets-title">
+                  <h2 id="makes-budgets-title">Shop By Budget</h2>
+                  <ul class="makes-options" data-makes-filter="budget">
+                    <li><button type="button" data-value="7000">Under $7,000</button></li>
+                    <li><button type="button" data-value="9000-14000">$9,000 - $14,000</button></li>
+                    <li><button type="button" data-value="14000-21000">$14,000 - $21,000</button></li>
+                    <li><button type="button" data-value="21000-36000">$21,000 - $36,000</button></li>
+                    <li><button type="button" data-value="36000-">Over $36,000</button></li>
+                  </ul>
+                </section>
+              </div>
+              <a class="makes-view-all" href="#make-model-filter">View All Makes <img src="assets/makes-chevron.svg" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <a href="./new-cars.html">New Cars</a>
+        <a href="./used-cars.html" aria-current="page">Used Cars</a>
+        <a href="./index.html#auctions">Auctions</a>
+        <a href="https://www.carmall24.com/market">Vehicle Market Trends</a>
+        <a href="./index.html#news">News</a>
+        <a href="./work-with-us.html">Work With Us</a>
+        <a href="https://www.carmall24.com/about">About Us</a>
+        <button class="mobile-search-trigger" type="button" aria-haspopup="dialog" aria-controls="header-search-dialog" aria-expanded="false">Search vehicles</button>
+      </nav>
+
+      <div class="header-tools">
+        <button class="locale-trigger" type="button" aria-haspopup="dialog" aria-controls="regional-settings" aria-expanded="false" aria-label="Regional settings, Global, English">
+          <span class="site-region">
+            <span class="site-region-icon" id="site-region-icon" aria-hidden="true"><img src="assets/globe.svg" alt=""></span>
+            <span id="site-region-name">Global</span>
+          </span>
+          <span class="locale-rule" aria-hidden="true"><img src="assets/language-divider.svg" alt=""></span>
+          <span class="site-language"><span id="site-language-name" lang="en" dir="auto">English</span><img src="assets/nav-chevron.svg" alt=""></span>
+        </button>
+        <button class="header-icon header-search" type="button" aria-label="Search vehicles" aria-haspopup="dialog" aria-controls="header-search-dialog" aria-expanded="false"><img src="assets/nav-search.svg" alt=""></button>
+        <details class="menu notification-menu">
+          <summary class="header-icon" aria-label="Notifications"><img src="assets/notification.svg" alt=""></summary>
+          <div class="menu-panel"><p>No new notifications.</p></div>
+        </details>
+        <a class="header-icon header-wallet" href="https://www.carmall24.com/account/wallet" aria-label="Wallet"><img src="assets/wallet.svg" alt=""></a>
+        <a class="header-icon" href="https://www.carmall24.com/account" aria-label="Account"><img src="assets/account.svg" alt=""></a>
+        <button class="header-icon mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="menu-bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container inventory-page" id="main-content" data-inventory="used">
+    <nav class="inventory-breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <h1 aria-current="page">Used Cars</h1>
+    </nav>
+
+    <div class="inventory-layout">
+      <aside class="inventory-filters" aria-labelledby="filter-title">
+        <div class="inventory-filter-header">
+          <h2 id="filter-title">Filter</h2>
+          <button class="inventory-filter-toggle" type="button" aria-controls="inventory-filters" aria-expanded="false">Filter <img src="assets/filter-chevron.svg" width="16" height="16" alt=""></button>
+          <button type="button" data-reset-filters>Reset</button>
+        </div>
+        <form class="inventory-filter-form" id="inventory-filters" autocomplete="off"></form>
+      </aside>
+
+      <section class="inventory-results" aria-label="Vehicle results">
+        <div class="inventory-categories">
+          <div class="inventory-category-track" role="group" aria-label="Filter by vehicle type"></div>
+          <button type="button" class="inventory-category-arrow" data-category-step="-1" aria-label="Previous vehicle types" hidden></button>
+          <button type="button" class="inventory-category-arrow" data-category-step="1" aria-label="More vehicle types" hidden></button>
+        </div>
+        <div class="inventory-toolbar">
+          <p id="inventory-result-count" role="status" tabindex="-1"></p>
+          <div class="inventory-toolbar-actions">
+            <button class="inventory-toolbar-button" id="inventory-view" type="button" aria-controls="inventory-cards"></button>
+            <details class="inventory-sort">
+              <summary class="inventory-toolbar-button">
+                <span id="inventory-sort-label">Sort By</span>
+              </summary>
+              <div class="inventory-sort-options" role="group" aria-label="Sort by">
+                <button type="button" data-sort="featured" aria-pressed="true">Recommended</button>
+                <button type="button" data-sort="price-asc" aria-pressed="false">Price: Low to High</button>
+                <button type="button" data-sort="price-desc" aria-pressed="false">Price: High to Low</button>
+                <button type="button" data-sort="year-desc" aria-pressed="false">Model Year: Newest</button>
+                <button type="button" data-sort="mileage-asc" aria-pressed="false">Mileage: Low to High</button>
+              </div>
+            </details>
+          </div>
+        </div>
+        <div class="inventory-active-filters" role="group" aria-label="Applied filters" hidden></div>
+        <ul class="inventory-cards" id="inventory-cards" data-view="single"></ul>
+        <div class="inventory-empty" hidden>
+          <p>No vehicles match these filters.</p>
+          <button type="button" class="primary-button" data-reset-filters>Reset Filters</button>
+        </div>
+        <noscript>Enable JavaScript to browse and filter vehicles.</noscript>
+      </section>
+    </div>
+  </main>
+
+  <template id="inventory-card-template">
+    <li>
+      <article class="inventory-card">
+        <div class="inventory-card-photo"><img width="242" height="182" alt=""></div>
+        <div class="inventory-card-body">
+          <div class="inventory-card-info">
+            <h2></h2>
+            <ul class="inventory-card-specs"></ul>
+          </div>
+          <div class="inventory-card-footer">
+            <p class="inventory-price"><span>Indicative FOB:</span><strong></strong></p>
+            <div class="inventory-card-actions">
+              <button class="inventory-favorite" type="button" aria-pressed="false"></button>
+              <a class="inventory-inquire"></a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </li>
+  </template>
+
+  <dialog class="header-search-dialog" id="header-search-dialog" aria-label="Vehicle search">
+    <div class="header-search-panel">
+      <form class="header-search-form" id="header-search-form" role="search" data-validate>
+        <div class="header-search-field">
+          <button class="header-search-submit" type="submit" aria-label="Submit vehicle search"><img src="assets/search-panel-magnifier.svg" alt=""></button>
+          <input id="header-search-input" type="search" name="query" placeholder="Search for vehicles" aria-label="Search for vehicles" autocomplete="off" maxlength="80" dir="auto" data-validation-trim data-required-message="Enter a vehicle to search for." required autofocus>
+        </div>
+        <button class="header-search-cancel" type="button">Cancel</button>
+      </form>
+
+      <div class="header-search-sections">
+        <section class="header-search-section" aria-labelledby="search-history-title">
+          <div class="header-search-section-heading">
+            <h2 id="search-history-title">Search History</h2>
+            <button class="header-search-action" id="search-history-clear" type="button"><img src="assets/search-history-clear.svg" alt=""> Clear all</button>
+          </div>
+          <div class="search-history-chips">
+            <div class="search-history-items" id="search-history-items"></div>
+            <button class="search-history-toggle" id="search-history-toggle" type="button" aria-label="Collapse search history" aria-expanded="true" aria-controls="search-history-items" hidden><img src="assets/search-history-toggle.svg" alt=""></button>
+          </div>
+          <p class="search-history-empty" id="search-history-empty" role="status" hidden>No search history yet.</p>
+        </section>
+
+        <section class="header-search-section" aria-labelledby="search-recommendations-title">
+          <div class="header-search-section-heading">
+            <h2 id="search-recommendations-title">Recommended For You</h2>
+            <button class="header-search-action" id="search-recommendations-refresh" type="button"><img src="assets/search-recommendations-refresh.svg" alt=""> Try Another</button>
+          </div>
+          <div class="search-recommendations" id="search-recommendations"></div>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="locale-dialog" id="regional-settings" aria-labelledby="regional-settings-title">
+    <header class="locale-dialog-header">
+      <h2 id="regional-settings-title">Regional Settings</h2>
+      <button class="locale-close" type="button" data-locale-close aria-label="Close regional settings">
+        <img src="assets/regional-close.svg" alt="">
+      </button>
+    </header>
+
+    <div class="locale-dialog-content">
+      <div class="locale-countries">
+        <section class="locale-popular" aria-labelledby="locale-popular-title">
+          <h3 id="locale-popular-title">Popular</h3>
+          <div class="locale-country-grid" id="locale-popular-options"></div>
+        </section>
+
+        <section class="locale-directory" aria-label="Country and region directory">
+          <div class="locale-search-row">
+            <p class="locale-country-count" id="locale-country-count" role="status"></p>
+            <label class="locale-search">
+              <img src="assets/regional-search.svg" alt="">
+              <input id="locale-country-search" type="search" placeholder="State/Province" aria-label="Search countries and regions" autocomplete="off">
+            </label>
+          </div>
+          <div class="locale-directory-body">
+            <div class="locale-continents" role="group" aria-label="Filter by continent">
+              <button type="button" data-continent="All" aria-pressed="true">All</button>
+              <button type="button" data-continent="Africa" aria-pressed="false">Africa</button>
+              <button type="button" data-continent="Asia" aria-pressed="false">Asia</button>
+              <button type="button" data-continent="Europe" aria-pressed="false">Europe</button>
+              <button type="button" data-continent="North America" aria-pressed="false">North America</button>
+              <button type="button" data-continent="South America" aria-pressed="false">South America</button>
+              <button type="button" data-continent="Oceania" aria-pressed="false">Oceania</button>
+            </div>
+            <div class="locale-letters" id="locale-letters" role="group" aria-label="Find a country by first letter"></div>
+            <div class="locale-country-scroll">
+              <div class="locale-country-grid" id="locale-country-options"></div>
+              <p class="locale-no-results" id="locale-no-results" hidden>No countries or regions found.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="locale-divider" aria-hidden="true"><img src="assets/regional-divider.svg" alt=""></div>
+
+      <section class="locale-languages" aria-labelledby="locale-language-title">
+        <h3 id="locale-language-title">Language</h3>
+        <div class="locale-language-options">
+          <button class="locale-option" type="button" data-language="en" aria-pressed="true"><span lang="en">English</span></button>
+          <button class="locale-option" type="button" data-language="ar" aria-pressed="false"><span lang="ar" dir="rtl">اللغة العربية</span></button>
+          <button class="locale-option" type="button" data-language="fr" aria-pressed="false"><span lang="fr">Français</span></button>
+          <button class="locale-option" type="button" data-language="ru" aria-pressed="false"><span lang="ru">Русский язык</span></button>
+          <button class="locale-option" type="button" data-language="es" aria-pressed="false"><span lang="es">Español</span></button>
+          <button class="locale-option" type="button" data-language="pt" aria-pressed="false"><span lang="pt">Português</span></button>
+          <button class="locale-option" type="button" data-language="de" aria-pressed="false"><span lang="de">Deutsch</span></button>
+          <button class="locale-option" type="button" data-language="pl" aria-pressed="false"><span lang="pl">Polski</span></button>
+        </div>
+      </section>
+    </div>
+
+    <footer class="locale-actions">
+      <button class="locale-cancel" type="button" data-locale-close>Cancel</button>
+      <button class="primary-button locale-apply" type="button">Apply</button>
+    </footer>
+  </dialog>
+</body>
+</html>
