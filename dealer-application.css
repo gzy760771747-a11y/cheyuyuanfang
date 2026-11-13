@@ -1,0 +1,424 @@
+.dealer-application-page {
+  --dealer-actions-height: 92px;
+}
+
+.dealer-application-page .site-header :is(.about-trigger, .header-tools) img[src$=".svg"] {
+  filter: none;
+}
+
+.dealer-application-main {
+  min-height: 100dvh;
+  padding-block: var(--header-height) calc(var(--dealer-actions-height) + 24px);
+  font-family: var(--partner-ui-font);
+}
+
+.dealer-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding-block: 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.dealer-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.dealer-breadcrumb [aria-current="page"] {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.dealer-flow,
+.dealer-card {
+  display: grid;
+}
+
+.dealer-flow {
+  gap: 16px;
+}
+
+.dealer-progress,
+.dealer-card {
+  border-radius: var(--card-radius);
+  background: var(--white);
+}
+
+.dealer-progress {
+  display: flex;
+  padding: 32px clamp(16px, 7vw, 120px);
+}
+
+.dealer-progress li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 16px 4px 0;
+  color: rgb(0 0 0 / 40%);
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.dealer-progress li:not(:last-child) {
+  flex: 1;
+  min-width: 0;
+}
+
+.dealer-progress li:not(:last-child)::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: #dcdcdc;
+}
+
+.dealer-step-number {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: url("assets/dealer-step-pending.svg") center no-repeat;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dealer-progress [aria-current="step"] {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.dealer-progress [aria-current="step"] .dealer-step-number {
+  background-image: url("assets/dealer-step-active.svg");
+  color: var(--white);
+}
+
+.dealer-progress [data-complete] {
+  color: rgb(0 0 0 / 90%);
+}
+
+.dealer-progress [data-complete] .dealer-step-number {
+  background-image: url("assets/dealer-step-complete.svg");
+  color: transparent;
+}
+
+.dealer-progress li[data-complete]::after {
+  background: var(--blue);
+}
+
+.dealer-card {
+  gap: 24px;
+  padding: 0 24px 24px;
+}
+
+.dealer-card-title {
+  padding-block: 24px;
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.dealer-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 32px;
+}
+
+.dealer-details :is(input, select),
+.dealer-agreement-check input {
+  scroll-margin-bottom: calc(var(--dealer-actions-height) + 16px);
+}
+
+.dealer-form-fields,
+.dealer-documents {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.dealer-export-select:has(option[value="No"]:checked) {
+  color: var(--placeholder);
+}
+
+.dealer-documents {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 32px;
+}
+
+.dealer-document {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.dealer-document--row-start {
+  grid-column: 1;
+}
+
+.dealer-document-field {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dealer-upload-target {
+  position: relative;
+  overflow: hidden;
+  width: min(200px, 100%);
+  aspect-ratio: 200 / 127;
+  border: 1px solid rgb(0 0 0 / 15%);
+  border-radius: 4px;
+  background: #f3f3f4;
+}
+
+.dealer-upload-target img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dealer-document-field:hover .dealer-upload-target,
+.dealer-document-field input:focus-visible + .dealer-upload-target {
+  border-color: var(--blue);
+}
+
+.dealer-document-field input:focus-visible + .dealer-upload-target {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.dealer-document-field input[aria-invalid="true"] + .dealer-upload-target {
+  border-color: var(--form-error);
+}
+
+.dealer-document-field input[aria-invalid="true"]:focus-visible + .dealer-upload-target {
+  outline: none;
+}
+
+.dealer-file-name {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  background: #edf2ff;
+  color: var(--blue);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.dealer-remove-file {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.dealer-document-field .field-error {
+  max-width: 200px;
+}
+
+.dealer-notice {
+  padding: 16px 24px;
+  border-radius: 8px;
+  background: rgb(36 87 232 / 8%);
+  color: rgb(0 0 0 / 90%);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.dealer-agreement-form,
+.dealer-agreement-card,
+.dealer-deposit-card,
+.dealer-deposit-details {
+  display: grid;
+}
+
+.dealer-agreement-form,
+.dealer-deposit-card {
+  gap: 24px;
+}
+
+.dealer-agreement-card,
+.dealer-deposit-card {
+  border: 1px solid rgb(0 0 0 / 8%);
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.dealer-agreement-card {
+  gap: 12px;
+  padding: 24px;
+  line-height: 1.2;
+}
+
+.dealer-agreement-card h2 {
+  color: #000;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.dealer-agreement-card p,
+.dealer-deposit-details {
+  color: var(--muted);
+}
+
+.dealer-agreement-check {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.dealer-agreement-check > .field-error {
+  grid-column: 1 / -1;
+}
+
+.dealer-agreement-check input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid rgb(0 0 0 / 30%);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dealer-agreement-check input:checked {
+  border: 0;
+  background: url("assets/dealer-agreement-checked.svg") center no-repeat;
+}
+
+.dealer-deposit-card {
+  justify-items: center;
+  padding: 48px 24px 40px;
+  text-align: center;
+}
+
+.dealer-deposit-details {
+  gap: 12px;
+  line-height: 1.2;
+}
+
+.dealer-deposit-label {
+  font-size: 20px;
+}
+
+.dealer-deposit-amount {
+  color: var(--ink);
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.dealer-application-actions {
+  position: fixed;
+  z-index: 1;
+  inset: auto 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 24px;
+  background: var(--white);
+}
+
+.dealer-action-button {
+  min-width: 114px;
+  min-height: 44px;
+  padding-inline: 16px;
+  border-radius: 8px;
+  font: 500 16px/22px "MiSans UI", MiSans, var(--partner-ui-font);
+}
+
+.dealer-back {
+  background: #f3f3f4;
+  color: #242629;
+}
+
+.dealer-back:hover {
+  background: #e9e9ec;
+}
+
+.dealer-deposit-button {
+  min-width: 0;
+}
+
+.dealer-action-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.primary-button.dealer-action-button:disabled:hover {
+  background: var(--blue);
+}
+
+@media (max-width: 960px) {
+  .dealer-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .dealer-application-page {
+    --dealer-actions-height: 76px;
+  }
+
+  .dealer-progress {
+    padding: 16px 12px;
+  }
+
+  .dealer-progress li {
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+    font-size: 13px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .dealer-progress li::after {
+    display: none;
+  }
+
+  .dealer-card {
+    gap: 20px;
+    padding-inline: 16px;
+  }
+
+  .dealer-card-title {
+    padding-block: 20px;
+  }
+
+  .dealer-documents {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 12px;
+  }
+
+  .dealer-document--row-start {
+    grid-column: auto;
+  }
+
+  .dealer-agreement-card,
+  .dealer-notice {
+    padding-inline: 16px;
+  }
+
+  .dealer-deposit-card {
+    padding-inline: 16px;
+  }
+
+  .dealer-application-actions {
+    padding: 16px;
+  }
+}

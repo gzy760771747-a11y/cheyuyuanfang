@@ -2,6 +2,118 @@
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const scrollBehavior = () => reducedMotion.matches ? 'instant' : 'smooth';
 
+  const fieldValidation = new WeakMap();
+  document.querySelectorAll('form[data-validate]').forEach(form => {
+    const chinese = form.closest('[lang]').lang.toLowerCase().startsWith('zh');
+    const deferValidation = form.hasAttribute('data-defer-validation');
+    const errors = new Map();
+    const callingCode = form.elements.namedItem('calling_code');
+    const localPhone = form.querySelector('[data-local-phone]');
+
+    function errorMessage(field) {
+      const { validity, dataset, value } = field;
+      if (deferValidation && !value.trim()) return '';
+      if (validity.valueMissing || (field.required && 'validationTrim' in dataset && !value.trim())) {
+        if (dataset.requiredMessage) return dataset.requiredMessage;
+        if (field.type === 'file') return chinese ? '请选择此项所需文件。' : 'Choose the required file.';
+        if (field.type === 'checkbox') return chinese ? '请勾选同意以上协议。' : 'Please agree to the terms.';
+        if (field instanceof HTMLSelectElement) return chinese ? '请选择此项。' : 'Please select an option.';
+        return chinese ? '请填写此项。' : 'Please fill in this field.';
+      }
+
+      if (validity.typeMismatch && field.type === 'email') {
+        return chinese ? '请输入有效的电子邮箱地址。' : 'Please enter a valid email address.';
+      }
+      if (validity.patternMismatch) return field.title || field.validationMessage;
+      if (!validity.valid) return field.validationMessage;
+
+      if (field === localPhone && value) {
+        const number = value.trim();
+        const digits = number.replace(/\D/g, '');
+        const codeLength = callingCode.validity.valid ? callingCode.value.length - 1 : 0;
+        if (!/^[\d\s().-]+$/.test(number) || digits.length < 6 || digits.length + codeLength > 15) {
+          return chinese ? '请输入有效的本地电话号码。' : 'Please enter a valid local phone number.';
+        }
+      }
+      return '';
+    }
+
+    function updateError(field, message) {
+      let error = errors.get(field);
+      if (!error && message) {
+        error = document.createElement('span');
+        error.className = 'field-error';
+        error.id = form.id + '-' + field.name + '-error';
+        error.setAttribute('aria-live', 'polite');
+        const wrapper = field.closest('label, fieldset') || form;
+        const labelText = field.labels?.[0]?.querySelector(':scope > span');
+        if (labelText && !field.hasAttribute('aria-label') && !field.hasAttribute('aria-labelledby')) {
+          labelText.id ||= form.id + '-' + field.name + '-label';
+          field.setAttribute('aria-labelledby', labelText.id);
+        }
+        wrapper.append(error);
+        errors.set(field, error);
+      }
+      if (!error) return;
+
+      error.textContent = message;
+      error.hidden = !message;
+      const describedBy = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(id => id && id !== error.id);
+      if (message) {
+        field.setAttribute('aria-invalid', 'true');
+        describedBy.push(error.id);
+      } else {
+        field.removeAttribute('aria-invalid');
+      }
+      if (describedBy.length) field.setAttribute('aria-describedby', describedBy.join(' '));
+      else field.removeAttribute('aria-describedby');
+    }
+
+    function refreshError(field, message) {
+      if (field?.form === form && (message || errors.has(field))) {
+        updateError(field, message || errorMessage(field));
+      }
+    }
+
+    form.noValidate = true;
+    form.addEventListener('submit', event => {
+      if (deferValidation) return;
+      let firstInvalid;
+      for (const field of form.elements) {
+        if (!field.willValidate) continue;
+        const message = errorMessage(field);
+        updateError(field, message);
+        if (message && !firstInvalid) firstInvalid = field;
+      }
+      if (firstInvalid) {
+        event.preventDefault();
+        firstInvalid.focus();
+      }
+    });
+
+    form.addEventListener('input', event => {
+      refreshError(event.target);
+      if (event.target === callingCode) refreshError(localPhone);
+    });
+
+    if (deferValidation) {
+      form.addEventListener('focusout', ({ target }) => {
+        if (target.form === form && target.willValidate) updateError(target, errorMessage(target));
+      });
+    }
+
+    form.addEventListener('reset', () => {
+      for (const field of errors.keys()) updateError(field, '');
+    });
+
+    fieldValidation.set(form, refreshError);
+  });
+
+  document.addEventListener('carmall24:validate-field', event => {
+    const field = event.target;
+    fieldValidation.get(field.form)?.(field, event.detail);
+  });
+
   // Reuse the design's sample cards, with an extra news card for scrolling on desktop.
   document.querySelectorAll('[data-card-count]').forEach(grid => {
     const card = grid.firstElementChild;
@@ -309,7 +421,7 @@
     trigger.addEventListener('click', () => {
       activeSearchTrigger = trigger;
       setNavigation(false);
-      headerSearchInput.value = '';
+      headerSearchForm.reset();
       historyExpanded = true;
       renderSearchHistory();
       renderRecommendations();
@@ -321,6 +433,7 @@
   });
 
   headerSearchForm.addEventListener('submit', event => {
+    if (event.defaultPrevented) return;
     event.preventDefault();
     searchVehicles(headerSearchInput.value);
   });
@@ -381,6 +494,7 @@
   const localeDialog = document.querySelector('#regional-settings');
   const localeTrigger = document.querySelector('.locale-trigger');
   const siteRegionIcon = document.querySelector('#site-region-icon');
+  const headerGlobe = siteRegionIcon.querySelector('img').getAttribute('src');
   const siteRegionName = document.querySelector('#site-region-name');
   const siteLanguageName = document.querySelector('#site-language-name');
   const localeSearch = document.querySelector('#locale-country-search');
@@ -407,7 +521,7 @@
   function updateLocaleTrigger() {
     const country = countriesByCode.get(savedSettings.country);
     const languageName = languages.get(savedSettings.language);
-    siteRegionIcon.replaceChildren(createCountryFlag(country.code, 'assets/globe.svg'));
+    siteRegionIcon.replaceChildren(createCountryFlag(country.code, headerGlobe));
     siteRegionName.textContent = country.code === 'global' ? country.name : country.code;
     siteLanguageName.textContent = languageName;
     siteLanguageName.lang = savedSettings.language;
@@ -560,58 +674,6 @@
   });
   updateLocaleTrigger();
 
-  const partnershipForm = document.querySelector('#partner-application');
-  if (partnershipForm) {
-    const countrySelect = partnershipForm.elements.namedItem('country');
-    const otherCountry = countrySelect.querySelector('option[value="Other"]');
-    regionalCountries.slice(1).forEach(({ name }) => {
-      countrySelect.add(new Option(name, name), otherCountry);
-    });
-
-    const draftStatus = document.querySelector('#partner-form-status');
-    const draftLink = document.querySelector('#partner-email-draft');
-
-    partnershipForm.addEventListener('input', event => {
-      if (event.target instanceof HTMLInputElement) event.target.setCustomValidity('');
-      draftStatus.hidden = true;
-    });
-
-    partnershipForm.addEventListener('submit', event => {
-      event.preventDefault();
-      const fields = Object.fromEntries([...new FormData(partnershipForm)].map(([name, value]) => [name, value.trim()]));
-      const missingName = ['contact', 'company'].find(name => !fields[name]);
-      if (missingName) {
-        const input = partnershipForm.elements.namedItem(missingName);
-        input.setCustomValidity('Enter a ' + missingName + ' name.');
-        input.reportValidity();
-        return;
-      }
-
-      const digits = fields.phone.replace(/\D/g, '');
-      if (!/^[\d\s().-]+$/.test(fields.phone) || digits.length < 6 || digits.length + fields.calling_code.length - 1 > 15) {
-        const phone = partnershipForm.elements.namedItem('phone');
-        phone.setCustomValidity('Enter a valid local phone number.');
-        phone.reportValidity();
-        return;
-      }
-
-      const details = [
-        'Partnership type: ' + fields.partnership,
-        'Country / Region: ' + fields.country,
-        'Contact name: ' + fields.contact,
-        'Company name: ' + fields.company,
-        'Imported a vehicle from China: ' + fields.imported,
-        fields.volume && 'Approximate monthly sales: ' + fields.volume,
-        fields.contact_method + ': ' + fields.calling_code + ' ' + fields.phone,
-        fields.requirements && 'Additional requirements: ' + fields.requirements
-      ].filter(Boolean).join('\r\n');
-      const message = 'Hello Carmall24, I’d like to discuss a dealer partnership.\r\n\r\n' + details;
-      draftLink.href = 'mailto:service@carmall24.com?subject=Carmall24%20dealer%20application&body=' + encodeURIComponent(message);
-      draftStatus.hidden = false;
-      draftLink.focus();
-    });
-  }
-
   if (!searchForm) return;
 
   const vehicleDialog = document.querySelector('#vehicle-dialog');
@@ -664,6 +726,7 @@
   const formStatus = document.querySelector('.form-status');
 
   contactForm.addEventListener('submit', event => {
+    if (event.defaultPrevented) return;
     event.preventDefault();
     const inquiry = new FormData(contactForm);
     const message = [

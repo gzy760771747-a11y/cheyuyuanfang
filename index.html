@@ -362,11 +362,11 @@
           <p>We Are Happy To Answer Any Of Your Questions Relating To Our Inventory, Locations Or The Way We Do Business.</p>
           <img src="assets/contact-rule.svg" alt="">
         </div>
-        <form class="contact-form" id="contact-form" method="post">
+        <form class="contact-form" id="contact-form" method="post" data-validate>
           <div class="contact-fields">
             <label class="contact-field contact-required">
               <span class="visually-hidden">Name</span>
-              <input name="name" placeholder="Name" autocomplete="name" maxlength="100" required>
+              <input name="name" placeholder="Name" autocomplete="name" maxlength="100" data-validation-trim data-required-message="Please enter your name." required>
               <img src="assets/required.svg" alt="">
             </label>
             <label class="contact-field contact-region">
@@ -384,7 +384,7 @@
             </datalist>
             <label class="contact-field contact-required">
               <span class="visually-hidden">E-Mail</span>
-              <input name="email" placeholder="E-Mail" type="email" autocomplete="email" maxlength="160" required>
+              <input name="email" placeholder="E-Mail" type="email" autocomplete="email" maxlength="160" data-required-message="Please enter your email address." required>
               <img src="assets/required.svg" alt="">
             </label>
             <label class="contact-field">
@@ -487,10 +487,10 @@
 
   <dialog class="header-search-dialog" id="header-search-dialog" aria-label="Vehicle search">
     <div class="header-search-panel">
-      <form class="header-search-form" id="header-search-form" role="search">
+      <form class="header-search-form" id="header-search-form" role="search" data-validate>
         <div class="header-search-field">
           <button class="header-search-submit" type="submit" aria-label="Submit vehicle search"><img src="assets/search-panel-magnifier.svg" alt=""></button>
-          <input id="header-search-input" type="search" name="query" placeholder="Search for vehicles" aria-label="Search for vehicles" autocomplete="off" maxlength="80" dir="auto" required autofocus>
+          <input id="header-search-input" type="search" name="query" placeholder="Search for vehicles" aria-label="Search for vehicles" autocomplete="off" maxlength="80" dir="auto" data-validation-trim data-required-message="Enter a vehicle to search for." required autofocus>
         </div>
         <button class="header-search-cancel" type="button">Cancel</button>
       </form>

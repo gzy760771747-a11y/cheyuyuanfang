@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Partner with Carmall24 to source vehicles, arrange inspections and ship to your market.">
+  <meta name="description" content="Apply to become a Carmall24 dealer and sell new and used vehicles through the platform.">
   <meta name="typeface" content="MiSans by Xiaomi">
   <title>Work With Us · Carmall24</title>
   <link rel="icon" href="assets/logo.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="work-with-us.css">
   <script src="app.js" defer></script>
+  <script src="dealer-application.js" defer></script>
 </head>
 <body class="partner-page" id="top">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -127,12 +128,12 @@
       <div class="container partner-hero-grid">
         <div class="partner-hero-copy">
           <div class="partner-intro">
-            <h1 id="partner-title">Source vehicles from China. <span>Grow your business.</span></h1>
-            <p>Find new and used vehicles for your market with Carmall24. Get support with vehicle sourcing, inspection, export paperwork and international shipping.</p>
+            <h1 id="partner-title">Sell your car <br class="partner-title-break">throughout the country. <span>Grow your business.</span></h1>
+            <p>Through Carmall24, you can sell your new cars and used cars throughout the country. We offer support services including vehicle procurement, inspection, export document processing, and international transportation.</p>
           </div>
           <div class="partner-hero-actions">
             <div class="partner-hero-links">
-              <a class="primary-button partner-inquiry-link" href="#partner-application">Start a partnership inquiry <img src="assets/partner-arrow.svg" alt=""></a>
+              <a class="primary-button partner-inquiry-link" href="./dealer-application.html#step-1">Apply to become a car dealer</a>
               <a class="partner-benefits-link" href="#partner-benefits">Explore the benefits <img src="assets/partner-chevron.svg" alt=""></a>
             </div>
             <p class="partner-hero-contact">
@@ -142,64 +143,55 @@
           </div>
         </div>
 
-        <form class="partner-form" id="partner-application" method="post" aria-labelledby="partner-form-title" tabindex="-1">
+        <form class="partner-form" id="partner-application" method="post" aria-labelledby="partner-form-title" tabindex="-1" data-validate data-defer-validation>
           <div class="partner-form-heading">
             <h2 id="partner-form-title">Partner with Carmall24</h2>
-            <p>Tell us what you want to source and where you need it delivered.</p>
+            <p>Fill out this form and apply quickly.</p>
           </div>
           <div class="partner-form-fields">
             <label class="partner-field">
-              <span class="partner-field-label">Partnership Type <img src="assets/partner-required.svg" alt=""></span>
-              <select class="partner-control partner-select" name="partnership" required>
-                <option value="" selected disabled>Select a partnership type</option>
-                <option>Vehicle dealer</option>
-                <option>Importer or distributor</option>
+              <span class="partner-field-label">Business type <img src="assets/partner-required.svg" alt=""></span>
+              <select class="partner-control partner-select" name="business_type" required>
+                <option value="" selected disabled>Please select</option>
+                <option>New car dealer</option>
+                <option>Used car dealer</option>
+                <option>New and used car dealer</option>
                 <option>Automotive trading company</option>
-                <option>Other partnership</option>
+                <option>Other</option>
               </select>
             </label>
             <label class="partner-field">
-              <span class="partner-field-label">Country / Region <img src="assets/partner-required.svg" alt=""></span>
-              <select class="partner-control partner-select" name="country" autocomplete="country-name" required>
-                <option value="" selected disabled>Select your Country/Region</option>
-                <option value="Other">Other country or region</option>
-              </select>
+              <span class="partner-field-label">City <img src="assets/partner-required.svg" alt=""></span>
+              <input class="partner-control partner-select" name="city" autocomplete="address-level2" list="partner-cities" placeholder="Please select" maxlength="80" data-validation-trim required>
+            </label>
+            <datalist id="partner-cities">
+              <option value="Beijing"></option>
+              <option value="Chengdu"></option>
+              <option value="Chongqing"></option>
+              <option value="Guangzhou"></option>
+              <option value="Hangzhou"></option>
+              <option value="Horgos"></option>
+              <option value="Shanghai"></option>
+              <option value="Shenzhen"></option>
+              <option value="Tianjin"></option>
+            </datalist>
+            <label class="partner-field">
+              <span class="partner-field-label">Business Name <img src="assets/partner-required.svg" alt=""></span>
+              <input class="partner-control" name="business_name" autocomplete="organization" placeholder="Full name of the enterprise" maxlength="100" data-validation-trim required>
             </label>
             <label class="partner-field">
-              <span class="partner-field-label">Contact Name <img src="assets/partner-required.svg" alt=""></span>
-              <input class="partner-control" name="contact" autocomplete="name" placeholder="Contact name" maxlength="80" required>
+              <span class="partner-field-label">Unified Social Credit Code <img src="assets/partner-required.svg" alt=""></span>
+              <input class="partner-control" name="credit_code" placeholder="Eighteen-digit number" maxlength="18" pattern="[A-Za-z0-9]{18}" title="Enter an 18-character code using letters and numbers" autocapitalize="characters" spellcheck="false" required>
             </label>
             <label class="partner-field">
-              <span class="partner-field-label">Company Name <img src="assets/partner-required.svg" alt=""></span>
-              <input class="partner-control" name="company" autocomplete="organization" placeholder="Company name" maxlength="100" required>
+              <span class="partner-field-label">Legal Representative <img src="assets/partner-required.svg" alt=""></span>
+              <input class="partner-control" name="legal_representative" autocomplete="name" placeholder="Please enter" maxlength="80" data-validation-trim required>
             </label>
-            <label class="partner-field">
-              <span class="partner-field-label partner-question-label">Have you ever imported a vehicle from China? <img src="assets/partner-required.svg" alt=""></span>
-              <select class="partner-control partner-select" name="imported" required>
-                <option value="" selected disabled>Select an option</option>
-                <option>Yes</option>
-                <option>No</option>
-              </select>
-            </label>
-            <label class="partner-field">
-              <span class="partner-field-label partner-question-label">What is your approximate monthly sales volume?</span>
-              <select class="partner-control partner-select" name="volume">
-                <option value="">Select an option</option>
-                <option>1–5 vehicles</option>
-                <option>6–20 vehicles</option>
-                <option>21–50 vehicles</option>
-                <option>51+ vehicles</option>
-              </select>
-            </label>
-            <fieldset class="partner-number partner-field-wide">
+            <fieldset class="partner-number">
               <legend class="partner-field-label">Contact Number <img src="assets/partner-required.svg" alt=""></legend>
               <div class="partner-number-fields">
-                <select class="partner-control partner-select" name="contact_method" aria-label="Contact method">
-                  <option>WhatsApp</option>
-                  <option>Phone</option>
-                </select>
                 <input class="partner-control partner-select" type="tel" name="calling_code" aria-label="Country calling code" autocomplete="tel-country-code" list="partner-calling-codes" value="+86" pattern="\+[1-9][0-9]{0,2}" title="Enter a plus sign followed by one to three digits" maxlength="4" required>
-                <input class="partner-control partner-phone" type="tel" name="phone" aria-label="Local phone number" autocomplete="tel-national" placeholder="Phone number" maxlength="26" required>
+                <input class="partner-control" type="tel" name="phone" aria-label="Local phone number" autocomplete="tel-national" placeholder="Please enter" maxlength="26" data-local-phone required>
               </div>
               <datalist id="partner-calling-codes">
                 <option value="+86"></option>
@@ -213,13 +205,25 @@
               </datalist>
             </fieldset>
             <label class="partner-field partner-field-wide">
-              <span class="partner-field-label">Additional Requirements</span>
-              <textarea class="partner-control" name="requirements" placeholder="Share any additional sourcing requirements." maxlength="650"></textarea>
+              <span class="partner-field-label">Taxpayer type <img src="assets/partner-required.svg" alt=""></span>
+              <select class="partner-control partner-select" name="taxpayer_type" required>
+                <option value="" selected disabled>Please select</option>
+                <option>General taxpayer</option>
+                <option>Small-scale taxpayer</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="partner-field partner-field-wide">
+              <span class="partner-field-label">Do you have the export qualification?</span>
+              <select class="partner-control partner-select" name="export_qualification">
+                <option value="">Please select</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
             </label>
           </div>
           <div class="partner-form-actions">
             <button class="primary-button partner-submit" type="submit">Submit Dealer Application</button>
-            <p id="partner-form-status" role="status" hidden>Your application draft is ready. <a id="partner-email-draft" href="mailto:service@carmall24.com">Open email draft</a></p>
             <p>A dealer specialist will contact you within 24 hours.</p>
           </div>
         </form>
@@ -228,38 +232,46 @@
 
     <div class="partner-metrics">
       <ul class="container partner-metric-list" aria-label="Carmall24 platform highlights">
-        <li><strong>10,000+</strong><span>Vehicles in the sourcing network</span></li>
-        <li><strong>Up to 350</strong><span>Vehicle inspection checks</span></li>
-        <li><strong>100+</strong><span>Countries served by shipping</span></li>
+        <li><strong>100+</strong><span>Covered Countries and Regions</span></li>
+        <li><strong>48h</strong><span>Average review duration</span></li>
+        <li><strong>0</strong><span>Settlement and Annual Fee</span></li>
+        <li><strong>1:1</strong><span>Accurate quotation by vehicle and VIN</span></li>
       </ul>
     </div>
 
     <div class="partner-sections">
       <section class="container partner-section" id="partner-benefits" aria-labelledby="partner-benefits-title">
         <div class="partner-section-heading">
-          <h2 id="partner-benefits-title">What we help you do</h2>
-          <p>Find the right vehicles, check their condition and plan how they’ll reach your market.</p>
+          <h2 id="partner-benefits-title">Why sell the car on Carmall24</h2>
+          <p>It is not a website for posting new shipment notices, but moving your entire workflow from receiving inquiries to issuing sales orders online.</p>
         </div>
         <div class="partner-services">
           <article class="partner-service">
-            <img src="assets/partner-sourcing.png" width="1672" height="941" loading="lazy" alt="">
+            <img src="assets/partner-overseas-buyers.png" width="1672" height="941" loading="lazy" alt="">
             <div class="partner-service-copy">
-              <h3>Vehicle Sourcing</h3>
-              <p>Tell us the brands, specifications, and quantities you need. We’ll match you with new and used vehicles from Chinese and international brands, including fully electric, hybrid, and gasoline models.</p>
+              <h3>Direct Connection with Overseas Buyers</h3>
+              <p>Buyers from markets such as Nigeria, Kenya, Saudi Arabia, and Russia post purchase requests directly on the platform; inquiries land in your backend — no need to rely on trade shows or intermediaries.</p>
             </div>
           </article>
           <article class="partner-service">
-            <img src="assets/partner-inspections.png" width="1672" height="941" loading="lazy" alt="">
+            <img src="assets/partner-vin-quotes.png" width="1672" height="941" loading="lazy" alt="">
             <div class="partner-service-copy">
-              <h3>Used Vehicle Inspections</h3>
-              <p>We help arrange inspections for used vehicles and share the findings so you can decide whether each vehicle meets your requirements.</p>
+              <h3>Per-VIN Quoting</h3>
+              <p>Each used car has its own condition and price. Quotes are generated precisely by VIN, and vehicle details are automatically created upon a deal, so there's no need to match cars manually in Excel.</p>
             </div>
           </article>
           <article class="partner-service">
-            <img src="assets/partner-shipping.png" width="1672" height="941" loading="lazy" alt="">
+            <img src="assets/partner-pricing.png" width="1672" height="941" loading="lazy" alt="">
             <div class="partner-service-copy">
-              <h3>Export &amp; Shipping</h3>
-              <p>We help prepare the required export documents, coordinate shipping, and confirm the route, costs, and pickup arrangements at your destination.</p>
+              <h3>You Set the Price</h3>
+              <p>Simply enter the tax-included vehicle price and gross margin; FOB / CIF prices are converted automatically. Inland transport, customs declaration, port charges, and ocean freight can be covered item by item.</p>
+            </div>
+          </article>
+          <article class="partner-service">
+            <img src="assets/partner-erp.png" width="1672" height="941" loading="lazy" alt="">
+            <div class="partner-service-copy">
+              <h3>Straight-Through ERP Integration</h3>
+              <p>Quoting, negotiation, deal confirmation, and sales orders run in one chain. The transaction price is locked to the vehicle source; documents are never lost, and reconciliation is hassle-free.</p>
             </div>
           </article>
         </div>
@@ -267,35 +279,47 @@
 
       <section class="container partner-section" aria-labelledby="partner-process-title">
         <div class="partner-section-heading">
-          <h2 id="partner-process-title">From first inquiry to vehicle pickup</h2>
-          <p>A clear process for dealers sourcing inspected used cars directly from China.</p>
+          <h2 id="partner-process-title">Entry process, 4 steps</h2>
+          <p>Submit online, manual review, available as soon as the same day.</p>
         </div>
         <div class="partner-process-card">
           <img class="partner-step-connector" src="assets/partner-step-connector.svg" alt="">
           <ol class="partner-steps">
             <li>
-              <span class="partner-step-symbol"><img src="assets/partner-step-circle.svg" alt=""><img class="partner-step-icon" src="assets/partner-step-requirements.png" width="40" height="40" loading="lazy" alt=""></span>
+              <span class="partner-step-symbol">
+                <img src="assets/partner-step-circle.svg" alt="">
+                <span class="partner-step-icon-slot"><img class="partner-step-icon" src="assets/partner-step-enterprise.png" width="40" height="40" loading="lazy" alt=""></span>
+              </span>
               <span class="partner-step-number">Step 1</span>
-              <h3>Share your requirements</h3>
-              <p>Tell us which vehicles you need, how many and where they’re going.</p>
+              <h3>Submit enterprise information</h3>
+              <p>Fill in the enterprise name, unified social credit code, contact person and business type.</p>
             </li>
             <li>
-              <span class="partner-step-symbol"><img src="assets/partner-step-circle.svg" alt=""><img class="partner-step-icon" src="assets/partner-step-review.png" width="40" height="40" loading="lazy" alt=""></span>
+              <span class="partner-step-symbol">
+                <img src="assets/partner-step-circle.svg" alt="">
+                <span class="partner-step-icon-slot"><img class="partner-step-icon" src="assets/partner-step-qualifications.png" width="40" height="40" loading="lazy" alt=""></span>
+              </span>
               <span class="partner-step-number">Step 2</span>
-              <h3>Review vehicle options</h3>
-              <p>Discuss availability, condition, pricing and shipping with the team.</p>
+              <h3>Upload qualifications</h3>
+              <p>Business license, export qualification certificate and legal representative identity document. PDF files or images are both acceptable.</p>
             </li>
             <li>
-              <span class="partner-step-symbol"><img src="assets/partner-step-circle.svg" alt=""><img class="partner-step-icon" src="assets/partner-step-confirm.png" width="40" height="40" loading="lazy" alt=""></span>
+              <span class="partner-step-symbol">
+                <img src="assets/partner-step-circle.svg" alt="">
+                <span class="partner-step-icon-slot"><img class="partner-step-icon" src="assets/partner-step-review.png" width="40" height="40" loading="lazy" alt=""></span>
+              </span>
               <span class="partner-step-number">Step 3</span>
-              <h3>Confirm your order</h3>
-              <p>Agree on vehicle specifications, documents and payment terms before placing the order.</p>
+              <h3>Platform review</h3>
+              <p>Material verification will be completed within 1–2 working days, and the settlement agreement will be signed upon approval.</p>
             </li>
             <li>
-              <span class="partner-step-symbol"><img src="assets/partner-step-circle.svg" alt=""><img class="partner-step-icon" src="assets/partner-step-delivery.png" width="40" height="40" loading="lazy" alt=""></span>
+              <span class="partner-step-symbol">
+                <img src="assets/partner-step-circle.svg" alt="">
+                <span class="partner-step-icon-slot"><img class="partner-step-icon" src="assets/partner-step-listing.png" width="40" height="40" loading="lazy" alt=""></span>
+              </span>
               <span class="partner-step-number">Step 4</span>
-              <h3>Arrange shipment and pickup</h3>
-              <p>Coordinate export and shipping, then prepare for customs clearance and pickup at your destination.</p>
+              <h3>List cars on the platform for sale</h3>
+              <p>Start receiving purchase inquiries, issuing quotations, negotiating prices, and synchronizing completed orders to your ERP.</p>
             </li>
           </ol>
         </div>
@@ -462,10 +486,10 @@
 
   <dialog class="header-search-dialog" id="header-search-dialog" aria-label="Vehicle search">
     <div class="header-search-panel">
-      <form class="header-search-form" id="header-search-form" role="search">
+      <form class="header-search-form" id="header-search-form" role="search" data-validate>
         <div class="header-search-field">
           <button class="header-search-submit" type="submit" aria-label="Submit vehicle search"><img src="assets/search-panel-magnifier.svg" alt=""></button>
-          <input id="header-search-input" type="search" name="query" placeholder="Search for vehicles" aria-label="Search for vehicles" autocomplete="off" maxlength="80" dir="auto" required autofocus>
+          <input id="header-search-input" type="search" name="query" placeholder="Search for vehicles" aria-label="Search for vehicles" autocomplete="off" maxlength="80" dir="auto" data-validation-trim data-required-message="Enter a vehicle to search for." required autofocus>
         </div>
         <button class="header-search-cancel" type="button">Cancel</button>
       </form>
