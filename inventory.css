@@ -457,6 +457,7 @@
 }
 
 .inventory-card-photo {
+  display: block;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 12px;
@@ -498,6 +499,10 @@
   font-size: 20px;
   font-weight: 600;
   line-height: 28px;
+}
+
+.inventory-detail-link:hover {
+  color: var(--blue);
 }
 
 .inventory-card-specs {

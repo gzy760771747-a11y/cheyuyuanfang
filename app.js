@@ -171,9 +171,11 @@
     }
 
     if (!searchForm) {
-      const url = new URL('./index.html', location.href);
+      const detail = document.querySelector('[data-vehicle-detail]');
+      const catalog = detail?.dataset.vehicleDetail === 'used' ? './used-cars.html' : './new-cars.html';
+      const url = new URL(detail ? catalog : './index.html', location.href);
       url.searchParams.set(filter, value);
-      url.hash = 'vehicles';
+      if (!detail) url.hash = 'vehicles';
       location.assign(url.href);
       return;
     }

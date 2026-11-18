@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View vehicle photos, specifications and export options from Carmall24.">
+  <meta name="typeface" content="MiSans by Xiaomi">
+  <title>Vehicle Details · Carmall24</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="vehicle-detail.css">
+  <script src="app.js" defer></script>
+  <script src="inventory-data.js" defer></script>
+  <script src="vehicle-detail-data.js" defer></script>
+  <script src="vehicle-detail.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="./index.html" aria-label="Carmall24 home">
+        <img src="assets/header-logo.png" width="132" height="44" alt="Carmall24">
+      </a>
+
+      <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+        <div class="makes-menu">
+          <button class="makes-trigger" type="button" aria-expanded="false" aria-controls="makes-panel">Makes</button>
+          <div class="makes-panel" id="makes-panel" hidden>
+            <div class="container makes-panel-inner">
+              <div class="makes-columns">
+                <section class="makes-column" aria-labelledby="makes-brands-title">
+                  <h2 id="makes-brands-title">Popular Makes</h2>
+                  <ul class="makes-options makes-options-with-icons" data-makes-filter="brand">
+                    <li><button type="button" data-value="toyota">Toyota</button></li>
+                    <li><button type="button" data-value="volkswagen">Volkswagen</button></li>
+                    <li><button type="button" data-value="bmw">BMW</button></li>
+                    <li><button type="button" data-value="byd">BYD</button></li>
+                    <li><button type="button" data-value="audi">Audi</button></li>
+                    <li><button type="button" data-value="mercedes-benz">Mercedes-Benz</button></li>
+                    <li><button type="button" data-value="honda">Honda</button></li>
+                    <li><button type="button" data-value="hyundai">Hyundai</button></li>
+                    <li><button type="button" data-value="nissan">Nissan</button></li>
+                  </ul>
+                </section>
+                <section class="makes-column" aria-labelledby="makes-types-title">
+                  <h2 id="makes-types-title">Shop By Type</h2>
+                  <ul class="makes-options makes-options-with-icons" data-makes-filter="type">
+                    <li><button type="button" data-value="sedan">Sedan</button></li>
+                    <li><button type="button" data-value="suv">SUV</button></li>
+                    <li><button type="button" data-value="minivan">Mlini Van</button></li>
+                    <li><button type="button" data-value="hatchback">Hatchback</button></li>
+                    <li><button type="button" data-value="wagon">Wagon</button></li>
+                    <li><button type="button" data-value="pickup">Pick Up</button></li>
+                    <li><button type="button" data-value="van">Van</button></li>
+                    <li><button type="button" data-value="truck">Truck</button></li>
+                  </ul>
+                </section>
+                <section class="makes-column" aria-labelledby="makes-models-title">
+                  <h2 id="makes-models-title">Popular Models</h2>
+                  <ul class="makes-options makes-options-with-icons" data-makes-filter="model">
+                    <li><button type="button" data-value="Audi A3">Audi A3</button></li>
+                    <li><button type="button" data-value="BMW X1">BMW X1</button></li>
+                    <li><button type="button" data-value="BMW Series">BMW Series</button></li>
+                    <li><button type="button" data-value="Havai H6">Havai H6</button></li>
+                    <li><button type="button" data-value="Toyota Corolla">Toyota Corolla</button></li>
+                    <li><button type="button" data-value="Volkswagen Golf">Volkswagen Golf</button></li>
+                    <li><button type="button" data-value="Audi Q3">Audi Q3</button></li>
+                    <li><button type="button" data-value="Mercedes-Benz Class">Mercedes-Benz Class</button></li>
+                    <li><button type="button" data-value="Toyota RAV4">Toyota RAV4</button></li>
+                    <li class="makes-placeholder" aria-hidden="true"></li>
+                  </ul>
+                </section>
+                <section class="makes-column" aria-labelledby="makes-budgets-title">
+                  <h2 id="makes-budgets-title">Shop By Budget</h2>
+                  <ul class="makes-options" data-makes-filter="budget">
+                    <li><button type="button" data-value="7000">Under $7,000</button></li>
+                    <li><button type="button" data-value="9000-14000">$9,000 - $14,000</button></li>
+                    <li><button type="button" data-value="14000-21000">$14,000 - $21,000</button></li>
+                    <li><button type="button" data-value="21000-36000">$21,000 - $36,000</button></li>
+                    <li><button type="button" data-value="36000-">Over $36,000</button></li>
+                  </ul>
+                </section>
+              </div>
+              <a class="makes-view-all" href="./new-cars.html#make-model-filter" id="detail-view-makes">View All Makes <img src="assets/makes-chevron.svg" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <a href="./new-cars.html">New Cars</a>
+        <a href="./used-cars.html">Used Cars</a>
+        <a href="./index.html#auctions">Auctions</a>
+        <a href="https://www.carmall24.com/market">Vehicle Market Trends</a>
+        <a href="./index.html#news">News</a>
+        <a href="./work-with-us.html">Work With Us</a>
+        <a href="https://www.carmall24.com/about">About Us</a>
+        <button class="mobile-search-trigger" type="button" aria-haspopup="dialog" aria-controls="header-search-dialog" aria-expanded="false">Search vehicles</button>
+      </nav>
+
+      <div class="header-tools">
+        <button class="locale-trigger" type="button" aria-haspopup="dialog" aria-controls="regional-settings" aria-expanded="false" aria-label="Regional settings, Global, English">
+          <span class="site-region">
+            <span class="site-region-icon" id="site-region-icon" aria-hidden="true"><img src="assets/globe.svg" alt=""></span>
+            <span id="site-region-name">Global</span>
+          </span>
+          <span class="locale-rule" aria-hidden="true"><img src="assets/language-divider.svg" alt=""></span>
+          <span class="site-language"><span id="site-language-name" lang="en" dir="auto">English</span><img src="assets/nav-chevron.svg" alt=""></span>
+        </button>
+        <button class="header-icon header-search" type="button" aria-label="Search vehicles" aria-haspopup="dialog" aria-controls="header-search-dialog" aria-expanded="false"><img src="assets/nav-search.svg" alt=""></button>
+        <details class="menu notification-menu">
+          <summary class="header-icon" aria-label="Notifications"><img src="assets/notification.svg" alt=""></summary>
+          <div class="menu-panel"><p>No new notifications.</p></div>
+        </details>
+        <a class="header-icon header-wallet" href="https://www.carmall24.com/account/wallet" aria-label="Wallet"><img src="assets/wallet.svg" alt=""></a>
+        <a class="header-icon" href="https://www.carmall24.com/account" aria-label="Account"><img src="assets/account.svg" alt=""></a>
+        <button class="header-icon mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="menu-bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container vehicle-detail" id="main-content" data-vehicle-detail>
+    <noscript>Enable JavaScript to view vehicle details and specifications.</noscript>
+    <nav class="detail-breadcrumb" aria-label="Breadcrumb" hidden>
+      <a href="./index.html">Home</a><span aria-hidden="true">/</span>
+      <a id="detail-catalog"></a><span aria-hidden="true">/</span>
+      <a id="detail-make"></a><span aria-hidden="true">/</span>
+      <span id="detail-trim" aria-current="page"></span>
+    </nav>
+    <div class="detail-layout" hidden>
+      <section class="detail-gallery" aria-label="Vehicle photos">
+        <div class="detail-photo">
+          <button class="detail-photo-open" type="button" aria-label="Enlarge vehicle photo">
+            <img id="detail-photo" width="848" height="681" alt="">
+          </button>
+          <button class="detail-arrow" type="button" data-photo-step="-1" aria-label="Previous photo"></button>
+          <button class="detail-arrow" type="button" data-photo-step="1" aria-label="Next photo"></button>
+          <span class="detail-photo-count" id="detail-photo-count" role="status"></span>
+        </div>
+        <div class="detail-thumbs" hidden>
+          <div class="detail-thumb-track" role="group" aria-label="Choose a vehicle photo"></div>
+          <button class="detail-arrow" type="button" data-thumb-step="-1" aria-label="Previous thumbnails"></button>
+          <button class="detail-arrow" type="button" data-thumb-step="1" aria-label="More thumbnails"></button>
+        </div>
+      </section>
+
+      <aside class="detail-sidebar" aria-labelledby="detail-title">
+        <section class="detail-panel detail-offer">
+          <div class="detail-actions">
+            <button type="button" id="detail-favorite" aria-pressed="false" data-detail-favorite>Favorites</button>
+            <button type="button" data-open-dialog="detail-share">Share</button>
+            <button type="button" data-open-dialog="detail-compare">Comparison</button>
+          </div>
+          <h1 id="detail-title"></h1>
+          <ul class="detail-summary" id="detail-summary" aria-label="Vehicle summary" hidden></ul>
+          <p class="detail-price">
+            <strong id="detail-price"><span class="detail-price-symbol">$</span><span id="detail-price-amount"></span></strong>
+            <span id="detail-price-label"></span>
+            <span class="detail-msrp" id="detail-msrp" hidden>MSRP $<s id="detail-msrp-amount"></s></span>
+          </p>
+          <div class="detail-trade">
+            <fieldset class="detail-choices detail-choices-trade">
+              <legend>Transaction Method</legend>
+              <label><input name="trade" type="radio" value="FCA"><span>FCA</span></label>
+              <label><input name="trade" type="radio" value="CIP" checked><span>CIP</span></label>
+              <label><input name="trade" type="radio" value="FOB"><span>FOB</span></label>
+              <label><input name="trade" type="radio" value="CIF"><span>CIF</span></label>
+            </fieldset>
+            <div class="detail-port">
+              <p>Port of shipment</p>
+              <div class="detail-port-route">
+                <span>Shipped from</span>
+                <button id="detail-port-button" type="button" data-open-dialog="detail-port-dialog">
+                  <span id="detail-port-value">Shanghai</span>
+                </button>
+              </div>
+            </div>
+            <fieldset class="detail-choices detail-choices-shipping">
+              <legend>Delivery method</legend>
+              <label><input name="shipping" type="radio" value="Container"><span>Container</span></label>
+              <label><input name="shipping" type="radio" value="Roll-on / Roll-off" checked><span>Roll-On / Roll-Off</span></label>
+            </fieldset>
+          </div>
+          <div class="detail-new-options" hidden>
+            <dl class="detail-colors" id="detail-colors"></dl>
+            <div class="detail-quantity">
+              <span id="detail-quantity-label">Quantity</span>
+              <div role="group" aria-labelledby="detail-quantity-label">
+                <button type="button" data-quantity-step="-1" aria-label="Decrease quantity" disabled>−</button>
+                <output id="detail-quantity" aria-live="polite">1</output>
+                <button type="button" data-quantity-step="1" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="detail-cta">
+            <a id="detail-buy" class="detail-outline detail-buy" href="#detail-inquiry">Buy Now</a>
+            <a class="primary-button" href="#detail-inquiry" data-inquiry="quote">Chat Now</a>
+          </div>
+        </section>
+
+        <section class="detail-panel detail-inspection" aria-labelledby="detail-inspection-title" hidden>
+          <div class="detail-inspection-header">
+            <div>
+              <h2 id="detail-inspection-title">Verified<br>Inspection Report</h2>
+              <p>Up to 350 professional checks evaluate vehicle condition and screen for accident, water and fire damage.</p>
+            </div>
+            <img class="detail-inspection-shield" src="assets/vehicle-detail/inspection-shield.png" alt="" width="160" height="160">
+          </div>
+          <ul class="detail-inspection-types" aria-label="Damage checks">
+            <li><img src="assets/vehicle-detail/accident.png" width="32" height="32" alt=""><span>Accident Damage</span></li>
+            <li><img src="assets/vehicle-detail/water.png" width="32" height="32" alt=""><span>Water Damage</span></li>
+            <li><img src="assets/vehicle-detail/fire.png" width="32" height="32" alt=""><span>Fire Damage</span></li>
+          </ul>
+          <div class="detail-inspection-certificate">
+            <h3 id="detail-inspection-model"></h3>
+            <p class="detail-inspection-status">No public inspection results for this vehicle.</p>
+            <p id="detail-condition" hidden></p>
+            <ul class="detail-inspection-checks">
+              <li>Exterior Design <span>Not reported</span></li>
+              <li>Interior Trim <span>Not reported</span></li>
+              <li>Configuration Features <span>Not reported</span></li>
+              <li>Structural Components <span>Not reported</span></li>
+              <li>Reinforcement Parts <span>Not reported</span></li>
+            </ul>
+            <div class="detail-inspection-photos" id="detail-inspection-photos" role="group" aria-label="Listing photos"></div>
+          </div>
+          <a class="detail-inspection-link" href="#detail-inquiry" data-inquiry="inspection">Request Full Report</a>
+        </section>
+      </aside>
+
+      <div class="detail-sections">
+        <section class="detail-section" aria-labelledby="vehicle-details-title">
+          <h2 id="vehicle-details-title">Vehicle Details</h2>
+          <div class="detail-panel detail-overview-panel"><dl class="detail-properties" id="detail-properties"></dl></div>
+        </section>
+
+        <section class="detail-section" aria-labelledby="vehicle-parameters-title">
+          <h2 id="vehicle-parameters-title">Vehicle Parameters</h2>
+          <div class="detail-panel detail-overview-panel">
+            <dl class="detail-properties" id="detail-parameters"></dl>
+            <button class="detail-show-more" type="button" data-open-dialog="detail-specs">Show More</button>
+          </div>
+        </section>
+
+        <section class="detail-section" aria-labelledby="vehicle-features-title" id="detail-features-section" hidden>
+          <h2 id="vehicle-features-title">Features</h2>
+          <ul class="detail-features" id="detail-features"></ul>
+        </section>
+
+        <section class="detail-section" id="detail-trends" aria-labelledby="detail-trends-title" hidden>
+          <h2 id="detail-trends-title">Vehicle Market Trends</h2>
+          <div class="detail-market">
+            <div class="detail-market-heading">
+              <div>
+                <h3>Price Trends</h3>
+                <p>The Historical Price Trend Of This Car</p>
+              </div>
+              <div class="detail-periods" role="group" aria-label="Price history period" hidden>
+                <button type="button" data-period="7" aria-pressed="false" aria-controls="detail-price-chart">7 Day</button>
+                <button type="button" data-period="30" aria-pressed="true" aria-controls="detail-price-chart">30 Day</button>
+                <button type="button" data-period="180" aria-pressed="false" aria-controls="detail-price-chart">6 Months</button>
+              </div>
+            </div>
+            <figure id="detail-price-chart" class="detail-price-chart"></figure>
+          </div>
+        </section>
+
+        <section class="detail-section" aria-labelledby="detail-purchase-title">
+          <h2 id="detail-purchase-title">Purchase Flow</h2>
+          <ol class="detail-panel detail-flow">
+            <li>
+              <div class="detail-flow-marker"><img src="assets/step-order.svg" alt=""></div>
+              <div class="detail-flow-copy">
+                <small>Step 1</small>
+                <h3>ORDER</h3>
+                <p>Buy now to place your order and pay your reservation deposit, or inquire now to receive a quote and confirm your order.</p>
+              </div>
+            </li>
+            <li>
+              <div class="detail-flow-marker"><img src="assets/step-payment.svg" alt=""></div>
+              <div class="detail-flow-copy">
+                <small>Step 2</small>
+                <h3>PAYMENT</h3>
+                <p>Pay your deposit or balance. You can complete the payment online or by wire transfer.</p>
+              </div>
+            </li>
+            <li>
+              <div class="detail-flow-marker"><img src="assets/step-shipping.svg" alt=""></div>
+              <div class="detail-flow-copy">
+                <small>Step 3</small>
+                <h3>SHIPPING</h3>
+                <p>Upon completion of vehicle reconditioning and export documentation, we will ship the vehicle to your designated destination port.</p>
+              </div>
+            </li>
+            <li>
+              <div class="detail-flow-marker"><img src="assets/step-pickup.svg" alt=""></div>
+              <div class="detail-flow-copy">
+                <small>Step 4</small>
+                <h3>PICKUP</h3>
+                <p>Clear customs and pick up the vehicle at the destination port.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="detail-section" id="detail-inquiry" aria-labelledby="detail-inquiry-title">
+          <h2 id="detail-inquiry-title">Inquire Now</h2>
+          <form class="contact-form detail-inquiry-form" id="detail-inquiry-form" method="post" data-validate>
+            <div class="contact-fields">
+              <label class="contact-field contact-required">
+                <span class="visually-hidden">Name</span>
+                <input name="name" placeholder="Name" autocomplete="name" maxlength="100" data-validation-trim data-required-message="Please enter your name." required>
+                <img src="assets/required.svg" alt="">
+              </label>
+              <label class="contact-field contact-region">
+                <span class="visually-hidden">State/Province</span>
+                <input name="province" placeholder="State/Province" autocomplete="address-level1" maxlength="100" list="detail-provinces">
+                <img src="assets/province-chevron.svg" alt="">
+              </label>
+              <datalist id="detail-provinces">
+                <option value="Beijing"></option>
+                <option value="Guangdong"></option>
+                <option value="Hebei"></option>
+                <option value="Shanghai"></option>
+                <option value="Tianjin"></option>
+                <option value="Xinjiang"></option>
+              </datalist>
+              <label class="contact-field contact-required">
+                <span class="visually-hidden">Email</span>
+                <input name="email" placeholder="E-Mail" type="email" autocomplete="email" maxlength="160" data-required-message="Please enter your email address." required>
+                <img src="assets/required.svg" alt="">
+              </label>
+              <label class="contact-field">
+                <span class="visually-hidden">WhatsApp number</span>
+                <input name="whatsapp" placeholder="WhatsApp" type="tel" autocomplete="tel" maxlength="50">
+              </label>
+              <label class="contact-field contact-message">
+                <span class="visually-hidden">Message</span>
+                <textarea name="message" placeholder="Message" maxlength="1500"></textarea>
+              </label>
+            </div>
+            <button class="primary-button contact-submit" type="submit" disabled>Submit</button>
+            <p class="form-status" role="status" hidden>Your inquiry is ready. <a id="detail-email-draft" href="mailto:service@carmall24.com">Open email draft</a></p>
+          </form>
+        </section>
+
+        <section class="detail-panel detail-about" aria-labelledby="detail-about-title">
+          <div class="detail-about-banner">
+            <div class="detail-about-copy">
+              <h2 id="detail-about-title">Regarding Carmall 24</h2>
+              <p>Provide services for overseas buyers in the purchase and export of Chinese used cars.</p>
+              <a href="https://www.carmall24.com/about">About Carmall 24 <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <svg class="detail-service-filter" width="0" height="0" aria-hidden="true">
+            <defs>
+              <filter id="detail-service-tint" color-interpolation-filters="sRGB">
+                <feFlood flood-color="#9eafe3"></feFlood>
+                <feComposite in2="SourceAlpha" operator="in"></feComposite>
+              </filter>
+            </defs>
+          </svg>
+          <ul class="detail-about-services">
+            <li><h3><span class="detail-service-icon"><img src="assets/vehicle-detail/service-inspection.png" width="16" height="16" alt=""></span>Vehicle Inspection</h3><p>Review the car’s condition before purchase.</p></li>
+            <li><h3><span class="detail-service-icon"><img src="assets/vehicle-detail/service-paperwork.png" width="16" height="16" alt=""></span>Export Paperwork</h3><p>Get help with documents and customs declarations.</p></li>
+            <li><h3><span class="detail-service-icon"><img src="assets/vehicle-detail/service-port.png" width="16" height="16" alt=""></span>Port Delivery</h3><p>Collect your vehicle at the destination port.</p></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div id="detail-related"></div>
+  </main>
+
+  <template id="detail-related-template">
+    <section class="detail-section detail-related">
+      <h2></h2>
+      <div class="detail-related-carousel">
+        <ul class="detail-related-track"></ul>
+        <div class="detail-related-controls">
+          <button class="detail-arrow" type="button" data-related-step="-1" aria-label="Previous vehicles" disabled></button>
+          <button class="detail-arrow" type="button" data-related-step="1" aria-label="More vehicles" disabled></button>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="detail-related-card-template">
+    <li>
+      <article class="detail-related-card">
+        <a class="detail-related-link">
+          <div class="detail-related-photo"></div>
+          <div class="detail-related-body">
+            <h3></h3>
+            <ul class="detail-related-specs"></ul>
+          </div>
+        </a>
+        <div class="detail-related-footer">
+          <div class="detail-related-price">
+            <p class="detail-related-price-label"></p>
+            <strong></strong>
+          </div>
+          <div class="detail-related-actions">
+            <button class="detail-related-action" type="button" aria-pressed="false" data-detail-favorite></button>
+            <a class="detail-related-action detail-related-inquire"></a>
+          </div>
+        </div>
+      </article>
+    </li>
+  </template>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <section>
+          <h2>Resource</h2>
+          <ul>
+            <li><a href="./new-cars.html">New Cars</a></li>
+            <li><a href="./used-cars.html">Used Cars</a></li>
+            <li><a href="./index.html#auctions">Auction</a></li>
+            <li><a href="https://www.carmall24.com/market">Market Trends</a></li>
+            <li><a href="./index.html#news">News</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>About Us</h2>
+          <ul>
+            <li><a href="https://www.carmall24.com/about">About Us</a></li>
+            <li><a href="https://www.carmall24.com/privacy">Privacy Policy</a></li>
+            <li><a href="https://www.carmall24.com/terms">Terms &amp; Conditions</a></li>
+            <li><a href="https://www.carmall24.com/shipping-policy">Shipping Policy</a></li>
+            <li><a href="https://www.carmall24.com/refund-policy">Return and Refund Policy</a></li>
+            <li><a href="https://www.carmall24.com/after-sales">After-Sales Policy</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Global Website</h2>
+          <ul>
+            <li><a href="https://en.carmall24.com/" lang="en">English</a></li>
+            <li><a href="https://ru.carmall24.com/" lang="ru">русский язык</a></li>
+            <li><a href="https://ar.carmall24.com/" lang="ar">اللغة العربية</a></li>
+            <li><a href="https://es.carmall24.com/" lang="es">Español</a></li>
+            <li><a href="https://fr.carmall24.com/" lang="fr">Francés</a></li>
+          </ul>
+        </section>
+        <div class="footer-apps">
+          <section>
+            <h2>Download Our App</h2>
+            <div class="store-badges">
+              <a href="https://apps.apple.com/app/carmall24/id6760745816"><img src="assets/app-store.png" width="100" height="33" alt="Download on the App Store"></a>
+              <a href="https://play.google.com/store/search?q=Carmall24&amp;c=apps"><img src="assets/google-play.png" width="100" height="33" alt="Get it on Google Play"></a>
+            </div>
+          </section>
+          <section>
+            <h2>Shop Share</h2>
+            <a href="https://luxing.carmall24.com">Luxing Aerospace Hebei Special Purpose Vehicle Co., Ltd.</a>
+          </section>
+        </div>
+        <section class="footer-contact">
+          <h2>Contact Us</h2>
+          <ul>
+            <li><img src="assets/mail.svg" alt=""><a href="mailto:service@carmall24.com">service@carmall24.com</a></li>
+            <li><img src="assets/call.svg" alt=""><span>WhatsApp: +86 0000000000</span></li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-rule" aria-hidden="true"><img src="assets/footer-divider.svg" alt=""></div>
+        <div class="footer-details">
+          <section class="footer-offices">
+            <h2>Company Address</h2>
+            <ul>
+              <li><img src="assets/location.svg" alt=""><span>No. 12 Beiling Road, Horgos, Ili Kazakh Autonomous Prefecture, Xinjiang Uygur Autonomous Region, China</span></li>
+              <li><img src="assets/location.svg" alt=""><span>27F, Tower B, Zhongtai International Plaza, Tianhe District, Guangzhou, China</span></li>
+              <li><img src="assets/location.svg" alt=""><span>No. 3351 Gudai Road, Minhang District, Shanghai, China</span></li>
+            </ul>
+          </section>
+          <section class="footer-social">
+            <h2>Follow Us</h2>
+            <div class="social-links">
+              <a href="https://www.facebook.com/people/Carmall24com/61586290542689/"><img src="assets/facebook.svg" alt="Facebook"></a>
+              <a href="https://www.pinterest.com/search/pins/?q=Carmall24"><img src="assets/pinterest.svg" alt="Pinterest"></a>
+              <a href="https://www.instagram.com/carmall24com"><img src="assets/instagram.png" width="20" height="20" alt="Instagram"></a>
+            </div>
+          </section>
+        </div>
+        <div class="footer-rule" aria-hidden="true"><img src="assets/footer-divider.svg" alt=""></div>
+        <p class="copyright">Copyright © 2026 Carmall24.com <span lang="zh-CN">津ICP备2025038322号-1</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="detail-drawer" id="detail-specs" aria-labelledby="detail-specs-title" aria-describedby="detail-spec-model">
+    <div class="detail-dialog-header">
+      <h2 id="detail-specs-title">Vehicle Parameters</h2>
+      <form method="dialog"><button class="detail-close" aria-label="Close specifications" autofocus><img src="assets/vehicle-detail/close.svg" alt=""></button></form>
+    </div>
+    <div class="detail-drawer-scroll">
+      <p class="visually-hidden" id="detail-spec-model"></p>
+      <div id="detail-spec-groups"></div>
+      <p class="detail-sources" id="detail-spec-sources"></p>
+    </div>
+  </dialog>
+
+  <dialog class="detail-dialog" id="detail-port-dialog" aria-labelledby="detail-port-title">
+    <div class="detail-dialog-header">
+      <h2 id="detail-port-title">Port of shipment</h2>
+      <form method="dialog"><button class="detail-close" aria-label="Close port selection"><img src="assets/vehicle-detail/close.svg" alt=""></button></form>
+    </div>
+    <form class="detail-port-form" id="detail-port-form">
+      <label>Port or city<input name="port" type="text" placeholder="Enter the port of shipment" value="Shanghai" maxlength="100" required autofocus></label>
+      <button class="primary-button" type="submit">Confirm</button>
+    </form>
+  </dialog>
+
+  <dialog class="detail-dialog" id="detail-share" aria-labelledby="detail-share-title">
+    <div class="detail-dialog-header">
+      <h2 id="detail-share-title">Share Vehicle</h2>
+      <form method="dialog"><button class="detail-close" aria-label="Close sharing"><img src="assets/vehicle-detail/close.svg" alt=""></button></form>
+    </div>
+    <div class="detail-share-form">
+      <label>Vehicle link<input id="detail-share-url" type="text" readonly autofocus></label>
+      <button class="primary-button" id="detail-copy" type="button">Copy Link</button>
+      <p id="detail-share-status" role="status" hidden></p>
+    </div>
+  </dialog>
+
+  <dialog class="detail-dialog detail-comparison-dialog" id="detail-compare" aria-labelledby="detail-compare-title">
+    <div class="detail-dialog-header">
+      <h2 id="detail-compare-title">Compare Vehicles</h2>
+      <form method="dialog"><button class="detail-close" aria-label="Close comparison"><img src="assets/vehicle-detail/close.svg" alt=""></button></form>
+    </div>
+    <div class="detail-compare-content">
+      <label>Compare with<select id="detail-compare-select"></select></label>
+      <table id="detail-comparison"></table>
+    </div>
+  </dialog>
+
+  <dialog class="detail-lightbox" id="detail-lightbox" aria-label="Vehicle photo viewer">
+    <form method="dialog"><button class="detail-close" aria-label="Close photo viewer" autofocus><img src="assets/vehicle-detail/close.svg" alt=""></button></form>
+    <img id="detail-lightbox-photo" alt="">
+    <button class="detail-arrow" type="button" data-photo-step="-1" aria-label="Previous photo"></button>
+    <button class="detail-arrow" type="button" data-photo-step="1" aria-label="Next photo"></button>
+    <p id="detail-lightbox-count" role="status"></p>
+  </dialog>
+
+  <dialog class="header-search-dialog" id="header-search-dialog" aria-label="Vehicle search">
+    <div class="header-search-panel">
+      <form class="header-search-form" id="header-search-form" role="search" data-validate>
+        <div class="header-search-field">
+          <button class="header-search-submit" type="submit" aria-label="Submit vehicle search"><img src="assets/search-panel-magnifier.svg" alt=""></button>
+          <input id="header-search-input" type="search" name="query" placeholder="Search for vehicles" aria-label="Search for vehicles" autocomplete="off" maxlength="80" dir="auto" data-validation-trim data-required-message="Enter a vehicle to search for." required autofocus>
+        </div>
+        <button class="header-search-cancel" type="button">Cancel</button>
+      </form>
+
+      <div class="header-search-sections">
+        <section class="header-search-section" aria-labelledby="search-history-title">
+          <div class="header-search-section-heading">
+            <h2 id="search-history-title">Search History</h2>
+            <button class="header-search-action" id="search-history-clear" type="button"><img src="assets/search-history-clear.svg" alt=""> Clear all</button>
+          </div>
+          <div class="search-history-chips">
+            <div class="search-history-items" id="search-history-items"></div>
+            <button class="search-history-toggle" id="search-history-toggle" type="button" aria-label="Collapse search history" aria-expanded="true" aria-controls="search-history-items" hidden><img src="assets/search-history-toggle.svg" alt=""></button>
+          </div>
+          <p class="search-history-empty" id="search-history-empty" role="status" hidden>No search history yet.</p>
+        </section>
+
+        <section class="header-search-section" aria-labelledby="search-recommendations-title">
+          <div class="header-search-section-heading">
+            <h2 id="search-recommendations-title">Recommended For You</h2>
+            <button class="header-search-action" id="search-recommendations-refresh" type="button"><img src="assets/search-recommendations-refresh.svg" alt=""> Try Another</button>
+          </div>
+          <div class="search-recommendations" id="search-recommendations"></div>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="locale-dialog" id="regional-settings" aria-labelledby="regional-settings-title">
+    <header class="locale-dialog-header">
+      <h2 id="regional-settings-title">Regional Settings</h2>
+      <button class="locale-close" type="button" data-locale-close aria-label="Close regional settings">
+        <img src="assets/regional-close.svg" alt="">
+      </button>
+    </header>
+
+    <div class="locale-dialog-content">
+      <div class="locale-countries">
+        <section class="locale-popular" aria-labelledby="locale-popular-title">
+          <h3 id="locale-popular-title">Popular</h3>
+          <div class="locale-country-grid" id="locale-popular-options"></div>
+        </section>
+
+        <section class="locale-directory" aria-label="Country and region directory">
+          <div class="locale-search-row">
+            <p class="locale-country-count" id="locale-country-count" role="status"></p>
+            <label class="locale-search">
+              <img src="assets/regional-search.svg" alt="">
+              <input id="locale-country-search" type="search" placeholder="State/Province" aria-label="Search countries and regions" autocomplete="off">
+            </label>
+          </div>
+          <div class="locale-directory-body">
+            <div class="locale-continents" role="group" aria-label="Filter by continent">
+              <button type="button" data-continent="All" aria-pressed="true">All</button>
+              <button type="button" data-continent="Africa" aria-pressed="false">Africa</button>
+              <button type="button" data-continent="Asia" aria-pressed="false">Asia</button>
+              <button type="button" data-continent="Europe" aria-pressed="false">Europe</button>
+              <button type="button" data-continent="North America" aria-pressed="false">North America</button>
+              <button type="button" data-continent="South America" aria-pressed="false">South America</button>
+              <button type="button" data-continent="Oceania" aria-pressed="false">Oceania</button>
+            </div>
+            <div class="locale-letters" id="locale-letters" role="group" aria-label="Find a country by first letter"></div>
+            <div class="locale-country-scroll">
+              <div class="locale-country-grid" id="locale-country-options"></div>
+              <p class="locale-no-results" id="locale-no-results" hidden>No countries or regions found.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="locale-divider" aria-hidden="true"><img src="assets/regional-divider.svg" alt=""></div>
+
+      <section class="locale-languages" aria-labelledby="locale-language-title">
+        <h3 id="locale-language-title">Language</h3>
+        <div class="locale-language-options">
+          <button class="locale-option" type="button" data-language="en" aria-pressed="true"><span lang="en">English</span></button>
+          <button class="locale-option" type="button" data-language="ar" aria-pressed="false"><span lang="ar" dir="rtl">اللغة العربية</span></button>
+          <button class="locale-option" type="button" data-language="fr" aria-pressed="false"><span lang="fr">Français</span></button>
+          <button class="locale-option" type="button" data-language="ru" aria-pressed="false"><span lang="ru">Русский язык</span></button>
+          <button class="locale-option" type="button" data-language="es" aria-pressed="false"><span lang="es">Español</span></button>
+          <button class="locale-option" type="button" data-language="pt" aria-pressed="false"><span lang="pt">Português</span></button>
+          <button class="locale-option" type="button" data-language="de" aria-pressed="false"><span lang="de">Deutsch</span></button>
+          <button class="locale-option" type="button" data-language="pl" aria-pressed="false"><span lang="pl">Polski</span></button>
+        </div>
+      </section>
+    </div>
+
+    <footer class="locale-actions">
+      <button class="locale-cancel" type="button" data-locale-close>Cancel</button>
+      <button class="primary-button locale-apply" type="button">Apply</button>
+    </footer>
+  </dialog>
+</body>
+</html>

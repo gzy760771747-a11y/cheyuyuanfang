@@ -2,6 +2,7 @@
   const page = document.querySelector('[data-inventory]');
   const isUsed = page.dataset.inventory === 'used';
   const catalog = globalThis.carmallInventory.filter(vehicle => vehicle.condition === page.dataset.inventory);
+  const query = new URLSearchParams(location.search);
   const filterForm = page.querySelector('.inventory-filter-form');
   const filters = page.querySelector('.inventory-filters');
   const filterToggle = page.querySelector('.inventory-filter-toggle');
@@ -68,12 +69,22 @@
   const makeModels = ['make', 'model', 'version'];
   const favoritesKey = 'carmall24-inventory-favorites';
   let favorites = new Set();
-  try {
-    const saved = JSON.parse(localStorage.getItem(favoritesKey));
-    if (Array.isArray(saved)) favorites = new Set(saved);
-  } catch {
-    // The current page can retain favorites when storage is unavailable.
+  function syncFavorites() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(favoritesKey));
+      favorites = new Set(Array.isArray(saved) ? saved : []);
+    } catch {
+      // The current page can retain favorites when storage is unavailable.
+    }
+    for (const button of cards.querySelectorAll('[data-favorite]')) {
+      button.setAttribute('aria-pressed', String(favorites.has(button.dataset.favorite)));
+    }
   }
+  syncFavorites();
+  window.addEventListener('pageshow', syncFavorites);
+  window.addEventListener('storage', event => {
+    if (event.key === favoritesKey) syncFavorites();
+  });
 
   const state = {
     types: new Set(),
@@ -82,12 +93,12 @@
     bounds: {},
     keyword: '',
     sort: 'featured',
-    multiple: new URLSearchParams(location.search).get('view') === 'multiple'
+    multiple: query.get('view') === 'multiple'
   };
   const bandDefaults = key => [0, ranges[key].max];
   const sorters = {
-    'price-asc': (a, b) => a.price - b.price,
-    'price-desc': (a, b) => b.price - a.price,
+    'price-asc': (a, b) => (a.price ?? Infinity) - (b.price ?? Infinity),
+    'price-desc': (a, b) => (b.price ?? -Infinity) - (a.price ?? -Infinity),
     'year-desc': (a, b) => b.year - a.year,
     'mileage-asc': (a, b) => a.mileage - b.mileage
   };
@@ -204,6 +215,7 @@
         return value >= from && value <= to;
       })
       && Object.entries(state.bounds).every(([key, [from, to]]) => {
+        if (from === 0 && to === ranges[key].max) return true;
         return vehicle[key] >= from && (to === ranges[key].max || vehicle[key] <= to);
       });
   }
@@ -212,26 +224,32 @@
     const card = template.content.firstElementChild.cloneNode(true);
     const title = titleFor(vehicle);
     const image = card.querySelector('img');
-    const heading = card.querySelector('h2');
+    const link = card.querySelector('.inventory-detail-link');
+    const photoLink = card.querySelector('.inventory-card-photo');
     const specs = card.querySelector('.inventory-card-specs');
     const favorite = card.querySelector('.inventory-favorite');
     const inquire = card.querySelector('.inventory-inquire');
     image.src = vehicle.photo;
     if (index >= 3) image.loading = 'lazy';
-    heading.textContent = title;
-    heading.title = title;
+    link.href = './vehicle-detail.html?id=' + encodeURIComponent(vehicle.id);
+    link.textContent = title;
+    link.title = title;
+    photoLink.href = link.href;
+    photoLink.setAttribute('aria-label', 'View ' + title);
     for (const value of [vehicle.registration || String(vehicle.year), number.format(vehicle.mileage) + 'km', vehicle.fuel]) {
       const item = document.createElement('li');
       item.textContent = value;
       specs.append(item);
     }
-    card.querySelector('.inventory-price strong').textContent = currency(vehicle.price);
+    const price = card.querySelector('.inventory-price');
+    price.querySelector('strong').textContent = vehicle.priceDisplay || currency(vehicle.price);
+    if (vehicle.priceDisplay) price.querySelector('span').textContent = 'Listed Price:';
     favorite.innerHTML = icon('favorite', 24);
     favorite.dataset.favorite = vehicle.id;
     favorite.setAttribute('aria-label', 'Save ' + title);
     favorite.setAttribute('aria-pressed', String(favorites.has(vehicle.id)));
     inquire.innerHTML = icon('inquire', 24);
-    inquire.href = './index.html?vehicle=' + encodeURIComponent(title) + '#contact';
+    inquire.href = link.href + '#detail-inquiry';
     inquire.setAttribute('aria-label', 'Inquire about ' + title);
     return card;
   }
@@ -367,7 +385,9 @@
   setOptions('priceFrom', priceOptions);
   setOptions('priceTo', priceOptions);
   resetFilters();
-  updateFilters();
+  const initialFilter = ['q', 'brand', 'type', 'model', 'budget'].find(filter => query.get(filter)?.trim());
+  if (initialFilter) applyExternalFilter(initialFilter, query.get(initialFilter).trim().slice(0, 100));
+  else updateFilters();
   updateView();
   updateCategoryArrows();
 
@@ -379,7 +399,7 @@
     updateFilters();
     if (!reset.getClientRects().length) count.focus({ preventScroll: true });
   });
-  page.addEventListener('carmall24:inventory-filter', ({ detail: { filter, value } }) => {
+  function applyExternalFilter(filter, value) {
     resetFilters();
     if (filter === 'brand') {
       state.fields.make = catalog.find(vehicle => normalize(vehicle.make) === normalize(value))?.make
@@ -395,6 +415,10 @@
       state.keyword = value;
     }
     updateFilters();
+  }
+
+  page.addEventListener('carmall24:inventory-filter', ({ detail: { filter, value } }) => {
+    applyExternalFilter(filter, value);
     count.focus({ preventScroll: true });
     count.scrollIntoView({ block: 'nearest' });
   });

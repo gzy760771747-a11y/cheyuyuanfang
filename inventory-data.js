@@ -1,4 +1,4 @@
-// Sample inventory for the standalone HTML preview.
+// Standalone inventory preview with sample vehicles and two published listings.
 globalThis.carmallInventory = [
   {
     id: 'new-rav4', condition: 'new', make: 'Toyota', model: 'RAV4',
@@ -6,6 +6,14 @@ globalThis.carmallInventory = [
     body: 'suv', seats: '4/5 Seats', fuel: 'Gasoline', transmission: 'Automatic',
     drive: 'Front-Wheel Drive', displacement: '1.7–2.0L', color: 'Silver',
     price: 17900, mileage: 0, photo: 'assets/toyota-rav4.png'
+  },
+  {
+    id: 'new-mg5', condition: 'new', make: 'MG', model: 'MG 5',
+    title: '2026 MG 5 180DVVT Global Luxury Edition',
+    version: '180DVVT Global Luxury Edition', year: 2026,
+    body: 'sedan', seats: '4/5 Seats', fuel: 'Gasoline', transmission: 'Automatic',
+    drive: 'Front-Wheel Drive', displacement: '1.0–1.6L', color: 'White',
+    priceDisplay: '$8**0', mileage: 0, photo: 'assets/vehicle-detail/mg-1.jpg'
   },
   {
     id: 'new-seal', condition: 'new', make: 'BYD', model: 'Seal',
@@ -49,6 +57,14 @@ globalThis.carmallInventory = [
     body: 'suv', seats: '4/5 Seats', fuel: 'Gasoline', transmission: 'Automatic',
     drive: 'Front-Wheel Drive', displacement: '1.7–2.0L', color: 'Silver',
     price: 9574, mileage: 12200, photo: 'assets/toyota-rav4.png'
+  },
+  {
+    id: 'used-sienna', condition: 'used', make: 'Toyota', model: 'Sienna',
+    title: 'Toyota Sienna 2027 2.5L Dual-Engine Front-Wheel-Drive Comfort Version',
+    version: '2.5L Hybrid FWD Comfort', year: 2027, registration: '2026.07',
+    body: 'minivan', seats: '7+ Seats', fuel: 'Hybrid', transmission: 'Automatic',
+    drive: 'Front-Wheel Drive', displacement: '2.1–3.0L', color: 'Black',
+    priceDisplay: '$3***0', mileage: 5000, photo: 'assets/vehicle-detail/sienna-1.jpg'
   },
   {
     id: 'used-corolla', condition: 'used', make: 'Toyota', model: 'Corolla',
