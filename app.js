@@ -114,7 +114,7 @@
     fieldValidation.get(field.form)?.(field, event.detail);
   });
 
-  // Reuse the design's sample cards, with an extra news card for scrolling on desktop.
+  // Add the design's extra news card to preview desktop scrolling.
   document.querySelectorAll('[data-card-count]').forEach(grid => {
     const card = grid.firstElementChild;
     for (let index = 1; index < Number(grid.dataset.cardCount); index += 1) {
@@ -125,10 +125,59 @@
   const searchForm = document.querySelector('#vehicle-search');
   const vehicleTitle = document.querySelector('#vehicles-title');
   const vehicleCards = document.querySelectorAll('.vehicle-card');
-  const vehicleGrid = document.querySelector('.vehicle-grid');
+  const vehicleGrids = document.querySelectorAll('.vehicle-grid');
   const filterFeedback = document.querySelector('.filter-feedback');
   const filterStatus = document.querySelector('#filter-status');
   const chips = document.querySelectorAll('.chips button[aria-pressed]');
+
+  const homeFavoriteButtons = [...document.querySelectorAll('[data-home-favorite]')];
+  const homeFavoritesKey = 'carmall24-inventory-favorites';
+  let homeFavorites = new Set();
+
+  function syncHomeFavorites() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(homeFavoritesKey));
+      homeFavorites = new Set(Array.isArray(saved) ? saved : []);
+    } catch {
+      // Favorites still work for this page when browser storage is unavailable.
+    }
+    homeFavoriteButtons.forEach(button => {
+      button.setAttribute('aria-pressed', String(homeFavorites.has(button.dataset.homeFavorite)));
+    });
+  }
+
+  if (homeFavoriteButtons.length) {
+    syncHomeFavorites();
+    window.addEventListener('pageshow', syncHomeFavorites);
+    window.addEventListener('storage', event => {
+      if (event.key === homeFavoritesKey || event.key === null) syncHomeFavorites();
+    });
+    homeFavoriteButtons.forEach(button => button.addEventListener('click', () => {
+      const id = button.dataset.homeFavorite;
+      if (!homeFavorites.delete(id)) homeFavorites.add(id);
+      homeFavoriteButtons.forEach(item => {
+        item.setAttribute('aria-pressed', String(homeFavorites.has(item.dataset.homeFavorite)));
+      });
+      try {
+        localStorage.setItem(homeFavoritesKey, JSON.stringify([...homeFavorites]));
+      } catch {
+        // Keep the selected state usable without persistent storage.
+      }
+    }));
+  }
+
+  document.querySelectorAll('[data-home-inquiry]').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const form = document.querySelector('#contact-form');
+      const message = form.elements.namedItem('message');
+      const title = link.closest('.vehicle-card').querySelector('.vehicle-title').textContent;
+      if (!message.value.trim()) message.value = 'I would like to inquire about ' + title + '.';
+      form.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
+      form.elements.namedItem('name').focus({ preventScroll: true });
+    });
+  });
 
   function applyFilters(keyword = '') {
     const filters = new FormData(searchForm);
@@ -155,7 +204,9 @@
     });
 
     filterFeedback.hidden = !(brand || type || budget || terms.length);
-    vehicleGrid.hidden = visibleCount === 0;
+    vehicleGrids.forEach(grid => {
+      grid.hidden = ![...grid.children].some(card => !card.hidden);
+    });
     filterStatus.textContent = visibleCount
       ? 'Showing ' + visibleCount + ' matching vehicles in this preview' + (keyword ? ' for “' + keyword + '”.' : '.')
       : 'No vehicles in this preview match ' + (keyword ? '“' + keyword + '”.' : 'these filters.');
@@ -218,6 +269,7 @@
     if (open === !makesPanel.hidden) return;
     makesPanel.hidden = !open;
     makesTrigger.setAttribute('aria-expanded', String(open));
+    document.querySelector('.popular-brands-view-all')?.setAttribute('aria-expanded', String(open));
     if (open) {
       menus.forEach(menu => { menu.open = false; });
       makesPanel.scrollTop = 0;
@@ -247,6 +299,12 @@
   });
 
   makesTrigger.addEventListener('click', () => setMakesPanel(makesPanel.hidden));
+
+  document.querySelector('.popular-brands-view-all')?.addEventListener('click', () => {
+    setNavigation(true);
+    setMakesPanel(true);
+    makesTrigger.focus({ preventScroll: true });
+  });
 
   makesMenu.addEventListener('focusout', event => {
     if (event.relatedTarget && !makesMenu.contains(event.relatedTarget)) setMakesPanel(false);
@@ -281,6 +339,7 @@
 
   document.addEventListener('click', event => {
     const target = event.target;
+    if (target.closest('.popular-brands-view-all')) return;
     menus.forEach(menu => {
       if (!menu.contains(target)) menu.open = false;
     });
@@ -675,18 +734,6 @@
   updateLocaleTrigger();
 
   if (!searchForm) return;
-
-  const vehicleDialog = document.querySelector('#vehicle-dialog');
-  vehicleGrid.addEventListener('click', event => {
-    if (!event.target.closest('.vehicle-link') || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (typeof vehicleDialog.showModal !== 'function') return;
-    event.preventDefault();
-    vehicleDialog.showModal();
-  });
-  vehicleDialog.querySelector('a').addEventListener('click', () => vehicleDialog.close());
-  vehicleDialog.addEventListener('click', event => {
-    if (event.target === vehicleDialog) vehicleDialog.close();
-  });
 
   const newsTrack = document.querySelector('#news-track');
   const newsStatus = document.querySelector('#news-status');
